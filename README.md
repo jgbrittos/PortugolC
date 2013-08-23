@@ -1,10 +1,9 @@
 PortugolC
 =========
 
-Compilador feito na disciplina de Fundamentos de Compiladores do Segundo semestre 2013 da Faculdade do Gama.
+Compilador da pseudo-linguagem Portugol para a linguagem procedural C, 
 
-
-Autores:
+feito na disciplina de Fundamentos de Compiladores do Segundo semestre 2013 da Faculdade do Gama - UnB, pelos alunos:
 
 Álvaro Fernado
 
