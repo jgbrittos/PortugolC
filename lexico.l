@@ -4,11 +4,18 @@
 #include <stdlib.h>
 %}
 
-white [ \t]+
-digit [0-9]
-integer {digit}+
-exponant [eE][+-]?{integer}
-real {integer}("."{integer})?{exponant}?
+falso [0fF]|"falso"
+verdadeiro [1vV]|"verdadeiro"
+branco [ \t]+
+digito [0-9]
+inteiro {digito}+
+/*exponant [eE][+-]?{integer}*/
+real {inteiro}("."{inteiro})
+caractere [a-zA-Z0-9]
+/*literal {caractere}+*/
+logico {verdadeiro}|{falso}
+indefinido "indefinido"
+SIMBOLO [a-zA-Z]+
 
 %%
 
