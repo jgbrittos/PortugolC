@@ -1,0 +1,41 @@
+/*
+
+vetor xpto de 5 inteiros
+
+vetor: 
+	"vetor" SIMBOLO "de" NUMERO tipo
+
+tipo:
+	INTEIRO | REAL | CARACTERE | LOGICO
+
+
+
+inteiro vet[5]
+
+vetor:
+	tipo IDENTIFICADOR "[" inteiro "]"
+tipo:
+	inteiro | REAL | CARACTERE | LOGICO
+
+
+ponteiro indefinido p
+(inteiro) p
+
+int x;
+void *x;
+
+ponteiro "ponteiro"
+ponteiro inteiro *p;
+*/
+
+
+"inteiro" return(INTEIRO);
+"real" return(REAL);
+"caractere" return(CARACTERE);
+"logico" return(LOGICO);
+"ponteiro" return(PONTEIRO);
+
+
+
+
+"%" return(PORCENTAGEM);
