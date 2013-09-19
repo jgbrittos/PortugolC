@@ -10,9 +10,9 @@ branco [ \t]+
 digito [0-9]
 inteiro {digito}+
 /*exponant [eE][+-]?{integer}*/
-/*literal {caractere}+*/
 real {inteiro}("."{inteiro})
 caractere [a-zA-Z0-9]
+/*literal {caractere}+*/
 logico {verdadeiro}|{falso}
 indefinido "indefinido"
 SIMBOLO [a-zA-Z]+

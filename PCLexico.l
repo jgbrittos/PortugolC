@@ -9,13 +9,11 @@ verdadeiro [1vV]|"verdadeiro"
 branco [ \t]+
 digito [0-9]
 inteiro {digito}+
-/*exponant [eE][+-]?{integer}*/
-/*literal {caractere}+*/
-real {inteiro}("."{inteiro})
+expoente [eE][+-]?{inteiro}
+real {inteiro}("."{inteiro})?{expoente}?
 caractere [a-zA-Z0-9]
 logico {verdadeiro}|{falso}
 indefinido "indefinido"
-SIMBOLO [a-zA-Z]+
 
 %%
 
@@ -29,7 +27,7 @@ return(NUMERO);
 "-" return(MENOS);
 "*" return(ASTERISCO);
 "/" return(BARRA);
-
+"^" return(POTENCIA);
 
 "<-" | "recebe" return(ATRIBUICAO);
 "!=" | "diferente"return(DIFERENTE);
@@ -39,7 +37,6 @@ return(NUMERO);
 "-<-" return(MENOS_ATRIBUICAO);
 "*<-" return(ASTERISCO_ATRIBUICAO);
 "/<-" return(BARRA_ATRIBUICAO);
-
 
 "<" return(MENOR);
 ">" return(MAIOR);
@@ -52,8 +49,8 @@ return(NUMERO);
 
 "(" return(PARENTESIS_ESQUERDO);
 ")" return(PARENTESIS_DIREITO);
-"{" return(CHAVES_ESQUERDO);
-"}" return(CHAVES_DIREITO);
+"{" return(CHAVE_ESQUERDA);
+"}" return(CHAVE_DIREITA);
 "[" return(COLCHETE_ESQUERDO);
 "]" return(COLCHETE_DIREITO);
 
