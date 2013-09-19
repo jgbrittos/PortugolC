@@ -15,3 +15,12 @@
 *.exe
 *.out
 *.app
+
+# Arquivos com til
+*.l~
+*.y~
+Makefile~
+*.h~
+*.c~
+*.txt~
+*.md~
