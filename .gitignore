@@ -16,7 +16,7 @@
 *.out
 *.app
 
-# Arquivos com til
+# Arquivos temporários com til
 *.l~
 *.y~
 Makefile~
