@@ -1,0 +1,11 @@
+TO DO LIST
+
+24/09/2013
+
+Fernando - Declaração /  atribuição
+
+João Gabriel - If, if/else
+
+Fagner - Entrada de dados
+
+Álvaro - Saída de dados
