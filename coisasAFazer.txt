@@ -38,4 +38,14 @@ ponteiro inteiro *p;
 
 
 
+   | Expressao MAIS Expressao { $$=$1+$3; }
+   | Expressao MENOS Expressao { $$=$1-$3; }
+   | Expressao ASTERISCO Expressao { $$=$1*$3; }
+   | Expressao BARRA Expressao { $$=$1/$3; }
+   | Expressao POTENCIA Expressao { $$=pow($1,$3); }
+   | PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO { $$=$2; }
+
+   | Expressao FIM_LINHA { printf("Resultado: %f\n",$1); }
+
+
 "%" return(PORCENTAGEM);
