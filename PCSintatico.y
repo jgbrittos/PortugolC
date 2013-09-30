@@ -50,6 +50,15 @@ Expressao:
    | SE PARENTESIS_ESQUERDO Expressao MAIOR Expressao PARENTESIS_DIREITO{ printf("if(%.2f > %.2f){}\n",$3, $5); }
    | SE PARENTESIS_ESQUERDO Expressao MAIOR_IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f >= %.2f){}\n",$3, $5); }
 
+   | SE Expressao MAIOR Expressao CHAVE_ESQUERDA 
+	CHAVE_DIREITA SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f){}else{}\n",$3, $5); }
+   | SE Expressao MAIOR_IGUAL Expressao CHAVE_ESQUERDA 
+	CHAVE_DIREITA SENAO CHAVE_ESQUERDA Expressao  CHAVE_DIREITA { printf("if(%.2f >= %.2f){}else{}\n",$3, $5); }
+   | SE PARENTESIS_ESQUERDO Expressao MAIOR Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA 
+	CHAVE_DIREITA SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f){}else{}\n",$3, $5); }
+   | SE PARENTESIS_ESQUERDO Expressao MAIOR_IGUAL Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA 
+	CHAVE_DIREITA SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f >= %.2f){}else{}\n",$3, $5); }
+
    | SE Expressao MENOR Expressao { printf("if(%.2f < %.2f){}\n",$2, $4); }
    | SE Expressao MENOR_IGUAL Expressao { printf("if(%.2f <= %.2f){}\n",$2, $4); }
    | SE PARENTESIS_ESQUERDO Expressao MENOR Expressao PARENTESIS_DIREITO{ printf("if(%.2f < %.2f){}\n",$3, $5); }
@@ -57,6 +66,8 @@ Expressao:
 
    | SE Expressao IGUAL Expressao { printf("if(%.2f == %.2f)\n",$2, $4); }
    | SE PARENTESIS_ESQUERDO Expressao IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f == %.2f){}\n",$3, $5); }
+
+
    ;
 
 %%
