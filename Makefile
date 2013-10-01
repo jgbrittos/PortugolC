@@ -6,5 +6,15 @@ portugolc: PCLexico.l PCSintatico.y
 	mv lex.yy.c lexico.c
 	gcc -o portugolc sintatico.c lexico.c -lm
 
-clean:
+init: portugolc
+	rm codigo.c
+	./portugolc >> codigo.c
+
+exec: codigo.c
+	gcc codigo.c -o programaC
+	./programaC
+
+clean: 
 	rm lexico.* sintatico.* portugolc
+
+

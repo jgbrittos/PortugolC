@@ -2,7 +2,11 @@
 #include "global.h"
 #include "sintatico.h"
 #include <stdlib.h>
+#define YY_DECL extern int yylex()
 %}
+
+/* This tells flex to read only one input file */
+%option noyywrap
 
 falso [0fF]|"falso"
 verdadeiro [1vV]|"verdadeiro"
@@ -16,15 +20,22 @@ caractere [{letra}0-9]
 logico {verdadeiro}|{falso}
 indefinido "indefinido"
 
-identificador [_{letra}]([_{letra}|{digito}])*
+identificador {caractere}
+
+/*identificador [_{letra}]([_{letra}|{digito}])* */
 
 %%
 
 {branco} { /* Nós ignoraremos os espaços em branco */ } 
+
 {real} { 
 	yylval=atof(yytext); 
-	return(NUMERO);
+	return(REAL);
 }
+
+"inclua"	return(INCLUA);
+"caractere"	return(CARACTERE);
+"inteiro"	return(INTEIRO);
 
 "enquanto" 	return(ENQUANTO);
 "se" 		return(SE);
@@ -34,11 +45,11 @@ identificador [_{letra}]([_{letra}|{digito}])*
 "para"		return(PARA);
 "repita"	return(REPITA);
 "faca"		return(REPITA);
+"pare"		return(PARE);
+"retorne"	return(RETORNE);
 
 "+" 		return(MAIS);
-"MAIS" 		return(MAIS);
 "-" 		return(MENOS);
-"MENOS" 	return(MENOS);
 "*" 		return(ASTERISCO);
 "/" 		return(BARRA);
 "^" 		return(POTENCIA);
@@ -68,6 +79,7 @@ identificador [_{letra}]([_{letra}|{digito}])*
 
 ":" 		return(DOIS_PONTOS);	/* para a futura identação se der tempo */
 ";" 		return(PONTO_E_VIRGULA);
+","		return(VIRGULA);
 
 "(" 		return(PARENTESIS_ESQUERDO);
 ")" 		return(PARENTESIS_DIREITO);
@@ -78,8 +90,13 @@ identificador [_{letra}]([_{letra}|{digito}])*
 
 "\n" 		return(FIM_LINHA);
 
+{identificador} { 
+	yylval = "fernando";
+	return(IDENTIFICADOR); 
+}
+
+
 %%
 
-yywrap () {
-return 0;
-}
+//no aditional c code
+
