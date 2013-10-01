@@ -5,6 +5,7 @@ portugolc: PCLexico.l PCSintatico.y
 	flex PCLexico.l
 	mv lex.yy.c lexico.c
 	gcc -o portugolc sintatico.c lexico.c -lm
-
+init: portugolc
+	./portugolc
 clean:
 	rm lexico.* sintatico.* portugolc
