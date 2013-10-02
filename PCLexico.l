@@ -34,6 +34,7 @@ identificador [_{letra}]([_{letra}|{digito}])*
 "para"		return(PARA);
 "repita"	return(REPITA);
 "faca"		return(REPITA);
+"capte"		return(CAPTE);
 
 "+" 		return(MAIS);
 "MAIS" 		return(MAIS);
@@ -75,6 +76,7 @@ identificador [_{letra}]([_{letra}|{digito}])*
 "}" 		return(CHAVE_DIREITA);
 "[" 		return(COLCHETE_ESQUERDO);
 "]" 		return(COLCHETE_DIREITO);
+
 
 "\n" 		return(FIM_LINHA);
 

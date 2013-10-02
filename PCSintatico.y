@@ -31,6 +31,10 @@
 
 %start Entrada
 
+/*ESTRUTURA DE ENTRADA E SAIDA*/
+
+%token CAPTE
+
 %%
 
 Entrada:
@@ -68,7 +72,12 @@ Expressao:
    | SE PARENTESIS_ESQUERDO Expressao IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f == %.2f){}\n",$3, $5); }
 
 
+   | CAPTE Expressao { printf("scanf(%%d, &%.2f);\n", $2); }
+   | CAPTE PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA { printf("scanf(%%d, &%.2f);\n", $3); }
+/*Até aqui consegui fazer com numeros, mas com letras é preciso definir novas regras para existência de variáveis*/
    ;
+
+
 
 %%
 
