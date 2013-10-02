@@ -11,7 +11,7 @@ extern FILE *yyin;
 
 %}
 
-%token INTEIRO REAL CARACTERE 
+%token INTEIRO REAL CARACTERE PALAVRA
 %token ATRIBUICAO DIFERENTE IDENTIFICADOR
 %token MAIS MENOS 
 %token ASTERISCO BARRA POTENCIA
@@ -55,7 +55,8 @@ Linha:
    ;
 Expressao:
    REAL { $$=$1; }
-  /* | SE Expressao MAIOR Expressao { printf("if(%.2f > %.2f){}\n",$2, $4); }
+   | PALAVRA { $$=$1; }
+   | SE Expressao MAIOR Expressao { printf("if(%.2f > %.2f){}\n",$2, $4); }
    | SE Expressao MAIOR_IGUAL Expressao { printf("if(%.2f >= %.2f){}\n",$2, $4); }
    | SE PARENTESIS_ESQUERDO Expressao MAIOR Expressao PARENTESIS_DIREITO { printf("if(%.2f > %.2f){}\n",$3, $5); }
    | SE PARENTESIS_ESQUERDO Expressao MAIOR_IGUAL Expressao PARENTESIS_DIREITO { printf("if(%.2f >= %.2f){}\n",$3, $5); }
@@ -76,15 +77,13 @@ Expressao:
 
    | SE Expressao IGUAL Expressao { printf("if(%.2f == %.2f)\n",$2, $4); }
    | SE PARENTESIS_ESQUERDO Expressao IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f == %.2f){}\n",$3, $5); }
-
-*/
+/*
    | IDENTIFICADOR ATRIBUICAO Expressao PONTO_E_VIRGULA { printf("%s = %.2f;\n", $1, $3);}   
-   | CAPTE Expressao { printf("scanf(%%d, &%.2f);\n", $2); }
-   | CAPTE PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA { printf("scanf(%%d, &%.2f);\n", $3); }
-/*Até aqui consegui fazer com numeros, mas com letras é preciso definir novas regras para existência de variáveis*/
-
+   | CAPTE Expressao { printf("scanf(%.2f, &x);\n", $2); }
+   | CAPTE PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA { printf("scanf(%%d, &x);\n", $3); }
+*/
+   | CAPTE Expressao Expressao { printf("PALAVRA %s\n", $3); }
    ;
-
 
 
 %%

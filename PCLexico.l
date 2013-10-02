@@ -17,6 +17,7 @@ expoente [eE][+-]?{inteiro}
 real {inteiro}("."{inteiro})?{expoente}?
 letra [a-zA-Z]
 caractere [{letra}0-9]
+palavra {caractere}*
 logico {verdadeiro}|{falso}
 indefinido "indefinido"
 
@@ -31,6 +32,10 @@ identificador {caractere}
 {real} { 
 	yylval=atof(yytext); 
 	return(REAL);
+}
+
+{palavra} {
+	return(PALAVRA);
 }
 
 "inclua"	return(INCLUA);
@@ -95,7 +100,7 @@ identificador {caractere}
 "\n" 		return(FIM_LINHA);
 
 {identificador} { 
-	yylval = "fernando";
+/*	yylval = "fernando";*/
 	return(IDENTIFICADOR); 
 }
 

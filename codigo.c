@@ -1,1 +1,2 @@
-(null) = 0.00;
+PALAVRA (null)
+gsyntax error
