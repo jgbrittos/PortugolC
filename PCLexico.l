@@ -45,8 +45,11 @@ identificador {caractere}
 "para"		return(PARA);
 "repita"	return(REPITA);
 "faca"		return(REPITA);
+
 "pare"		return(PARE);
 "retorne"	return(RETORNE);
+
+"capte"		return(CAPTE);
 
 "+" 		return(MAIS);
 "-" 		return(MENOS);
@@ -87,6 +90,7 @@ identificador {caractere}
 "}" 		return(CHAVE_DIREITA);
 "[" 		return(COLCHETE_ESQUERDO);
 "]" 		return(COLCHETE_DIREITO);
+
 
 "\n" 		return(FIM_LINHA);
 

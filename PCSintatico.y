@@ -29,8 +29,10 @@ extern FILE *yyin;
 
 %token INCLUA
 
-/*SESSAO DE ESTRUTURAS CONDICIONAIS E DE REPETICAO*/
+/*ESTRUTURA DE ENTRADA E SAIDA*/
+%token CAPTE
 
+/*SESSAO DE ESTRUTURAS CONDICIONAIS E DE REPETICAO*/
 %token SE SENAO
 %token PARA PARE ENQUANTO FACA REPITA RETORNE
 
@@ -38,6 +40,8 @@ extern FILE *yyin;
 %left ASTERISCO BARRA
 
 %start Entrada
+
+
 
 %%
 
@@ -72,9 +76,16 @@ Expressao:
 
    | SE Expressao IGUAL Expressao { printf("if(%.2f == %.2f)\n",$2, $4); }
    | SE PARENTESIS_ESQUERDO Expressao IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f == %.2f){}\n",$3, $5); }
+
 */
    | IDENTIFICADOR ATRIBUICAO Expressao PONTO_E_VIRGULA { printf("%s = %.2f;\n", $1, $3);}   
+   | CAPTE Expressao { printf("scanf(%%d, &%.2f);\n", $2); }
+   | CAPTE PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA { printf("scanf(%%d, &%.2f);\n", $3); }
+/*Até aqui consegui fazer com numeros, mas com letras é preciso definir novas regras para existência de variáveis*/
+
    ;
+
+
 
 %%
 
