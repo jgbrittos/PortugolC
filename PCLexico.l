@@ -3,6 +3,7 @@
 #include "sintatico.h"
 #include <stdlib.h>
 #define YY_DECL extern int yylex()
+char buffer[];
 %}
 
 /* This tells flex to read only one input file */
@@ -99,6 +100,7 @@ identificador {letra}+
 "\n" 		return(FIM_LINHA);
 
 {identificador} { 
+	strcpy(buffer, yytext);
 	return IDENTIFICADOR; 
 }
 

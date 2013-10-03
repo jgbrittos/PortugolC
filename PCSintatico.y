@@ -8,6 +8,7 @@
 extern int yylex();
 extern int yyparse();
 extern FILE *yyin;
+extern buffer[];
 
 %}
 
@@ -93,7 +94,7 @@ Expressao:
 
 Tipo:
     INTEIRO Expressao { printf("int %.2f\n", $2); } 
-    | IDENTIFICADOR ATRIBUICAO Expressao { printf("x = %s %.2f;\n", $1, $3);}   
+    | IDENTIFICADOR ATRIBUICAO Expressao { printf("x = %s %.2f;\n", buffer, $3);}   
 ;
 
 

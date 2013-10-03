@@ -77,11 +77,12 @@
 extern int yylex();
 extern int yyparse();
 extern FILE *yyin;
+extern buffer[];
 
 
 
 /* Line 268 of yacc.c  */
-#line 85 "PCSintatico.tab.c"
+#line 86 "PCSintatico.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -172,7 +173,7 @@ typedef int YYSTYPE;
 
 
 /* Line 343 of yacc.c  */
-#line 176 "PCSintatico.tab.c"
+#line 177 "PCSintatico.tab.c"
 
 #ifdef short
 # undef short
@@ -473,9 +474,9 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    54,    54,    56,    59,    60,    61,    64,    65,    66,
-      67,    68,    70,    71,    72,    73,    87,    88,    90,    91,
-      93,    97,    98
+       0,    53,    53,    55,    58,    59,    60,    63,    64,    65,
+      66,    67,    69,    70,    71,    72,    86,    87,    89,    90,
+      92,    96,    97
 };
 #endif
 
@@ -1447,126 +1448,126 @@ yyreduce:
         case 5:
 
 /* Line 1806 of yacc.c  */
-#line 60 "PCSintatico.y"
+#line 59 "PCSintatico.y"
     { /*printf("Resultado: %.2f\n",$1); */}
     break;
 
   case 7:
 
 /* Line 1806 of yacc.c  */
-#line 64 "PCSintatico.y"
+#line 63 "PCSintatico.y"
     { (yyval)=(yyvsp[(1) - (1)]); }
     break;
 
   case 8:
 
 /* Line 1806 of yacc.c  */
-#line 65 "PCSintatico.y"
+#line 64 "PCSintatico.y"
     { printf("if(%.2f > %.2f)\n",(yyvsp[(2) - (4)]), (yyvsp[(4) - (4)])); }
     break;
 
   case 9:
 
 /* Line 1806 of yacc.c  */
-#line 66 "PCSintatico.y"
+#line 65 "PCSintatico.y"
     { printf("if(%.2f >= %.2f)\n",(yyvsp[(2) - (4)]), (yyvsp[(4) - (4)])); }
     break;
 
   case 10:
 
 /* Line 1806 of yacc.c  */
-#line 67 "PCSintatico.y"
+#line 66 "PCSintatico.y"
     { printf("if(%.2f > %.2f)\n",(yyvsp[(3) - (6)]), (yyvsp[(5) - (6)])); }
     break;
 
   case 11:
 
 /* Line 1806 of yacc.c  */
-#line 68 "PCSintatico.y"
+#line 67 "PCSintatico.y"
     { printf("if(%.2f >= %.2f)\n",(yyvsp[(3) - (6)]), (yyvsp[(5) - (6)])); }
     break;
 
   case 12:
 
 /* Line 1806 of yacc.c  */
-#line 70 "PCSintatico.y"
+#line 69 "PCSintatico.y"
     { printf("if(%.2f < %.2f)\n",(yyvsp[(2) - (4)]), (yyvsp[(4) - (4)])); }
     break;
 
   case 13:
 
 /* Line 1806 of yacc.c  */
-#line 71 "PCSintatico.y"
+#line 70 "PCSintatico.y"
     { printf("if(%.2f <= %.2f)\n",(yyvsp[(2) - (4)]), (yyvsp[(4) - (4)])); }
     break;
 
   case 14:
 
 /* Line 1806 of yacc.c  */
-#line 72 "PCSintatico.y"
+#line 71 "PCSintatico.y"
     { printf("if(%.2f < %.2f)\n",(yyvsp[(3) - (6)]), (yyvsp[(5) - (6)])); }
     break;
 
   case 15:
 
 /* Line 1806 of yacc.c  */
-#line 73 "PCSintatico.y"
+#line 72 "PCSintatico.y"
     { printf("if(%.2f <= %.2f)\n",(yyvsp[(3) - (6)]), (yyvsp[(5) - (6)])); }
     break;
 
   case 16:
 
 /* Line 1806 of yacc.c  */
-#line 87 "PCSintatico.y"
+#line 86 "PCSintatico.y"
     { printf("if(%.2f == %.2f)\n",(yyvsp[(2) - (4)]), (yyvsp[(4) - (4)])); }
     break;
 
   case 17:
 
 /* Line 1806 of yacc.c  */
-#line 88 "PCSintatico.y"
+#line 87 "PCSintatico.y"
     { printf("if(%.2f == %.2f)\n",(yyvsp[(3) - (6)]), (yyvsp[(5) - (6)])); }
     break;
 
   case 18:
 
 /* Line 1806 of yacc.c  */
-#line 90 "PCSintatico.y"
+#line 89 "PCSintatico.y"
     { printf("scanf(%.2f, &x);\n", (yyvsp[(2) - (2)])); }
     break;
 
   case 19:
 
 /* Line 1806 of yacc.c  */
-#line 91 "PCSintatico.y"
+#line 90 "PCSintatico.y"
     { printf("scanf(%%d, &x);\n", (yyvsp[(3) - (5)])); }
     break;
 
   case 20:
 
 /* Line 1806 of yacc.c  */
-#line 93 "PCSintatico.y"
+#line 92 "PCSintatico.y"
     { printf("include <%.2f>\n", (yyvsp[(3) - (4)])) ; }
     break;
 
   case 21:
 
 /* Line 1806 of yacc.c  */
-#line 97 "PCSintatico.y"
+#line 96 "PCSintatico.y"
     { printf("int %.2f\n", (yyvsp[(2) - (2)])); }
     break;
 
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 98 "PCSintatico.y"
-    { printf("x = %s %.2f;\n", (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)]));}
+#line 97 "PCSintatico.y"
+    { printf("x = %s %.2f;\n", buffer, (yyvsp[(3) - (3)]));}
     break;
 
 
 
 /* Line 1806 of yacc.c  */
-#line 1570 "PCSintatico.tab.c"
+#line 1571 "PCSintatico.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1797,7 +1798,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 102 "PCSintatico.y"
+#line 101 "PCSintatico.y"
 
 
 int yyerror(char *s) {
