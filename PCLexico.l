@@ -17,11 +17,10 @@ expoente [eE][+-]?{inteiro}
 real {inteiro}("."{inteiro})?{expoente}?
 letra [a-zA-Z]
 caractere [{letra}0-9]
-palavra {caractere}*
 logico {verdadeiro}|{falso}
 indefinido "indefinido"
 
-identificador {caractere}
+identificador {letra}+
 
 /*identificador [_{letra}]([_{letra}|{digito}])* */
 
@@ -34,9 +33,9 @@ identificador {caractere}
 	return(REAL);
 }
 
-{palavra} {
-	return(PALAVRA);
-}
+
+"inteiro"	return(INTEIRO);
+
 
 "inclua"	return(INCLUA);
 "caractere"	return(CARACTERE);
@@ -100,8 +99,7 @@ identificador {caractere}
 "\n" 		return(FIM_LINHA);
 
 {identificador} { 
-/*	yylval = "fernando";*/
-	return(IDENTIFICADOR); 
+	return IDENTIFICADOR; 
 }
 
 
