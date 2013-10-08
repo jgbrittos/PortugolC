@@ -12,13 +12,13 @@ extern buffer[];
 
 %}
 
-%token INTEIRO REAL CARACTERE
+%token INTEIRO REAL NUMERO_REAL CARACTERE
 
 %token ATRIBUICAO DIFERENTE IDENTIFICADOR
 %token MAIS MENOS 
 %token ASTERISCO BARRA POTENCIA
 
-%token FIM_LINHA IDENTACAO
+%token FIM_LINHA
 
 %token E OU
 %token MAIS_ATRIBUICAO MENOS_ATRIBUICAO 
@@ -56,11 +56,12 @@ Entrada:
    ;
 Linha:
    FIM_LINHA
-   | Expressao FIM_LINHA { /*printf("Resultado: %.2f\n",$1); */}
+   | Expressao FIM_LINHA
    | Tipo FIM_LINHA
+   | Retorno FIM_LINHA
    ;
 Expressao:
-   REAL { $$=$1; }
+   NUMERO_REAL { $$=$1; }
    | SE Expressao MAIOR Expressao { printf("if(%.2f > %.2f)\n",$2, $4); }
    | SE Expressao MAIOR_IGUAL Expressao { printf("if(%.2f >= %.2f)\n",$2, $4); }
    | SE PARENTESIS_ESQUERDO Expressao MAIOR Expressao PARENTESIS_DIREITO { printf("if(%.2f > %.2f)\n",$3, $5); }
@@ -93,13 +94,16 @@ Tipo:
    INTEIRO IDENTIFICADOR { printf("int %s;\n", buffer); } 
    | REAL IDENTIFICADOR { printf("float %s;\n", buffer); } 
    | CARACTERE IDENTIFICADOR { printf("char %s;\n", buffer); } 
-   | IDENTIFICADOR ATRIBUICAO Expressao { printf("%s = %.2f;\n", buffer, $3);}
+   | IDENTIFICADOR ATRIBUICAO Expressao { printf("%s = %d;\n", buffer, $3);}
    | INTEIRO PRINCIPAL PARENTESIS_ESQUERDO PARENTESIS_DIREITO CHAVE_ESQUERDA { printf("int main(){\n", buffer, $3);}
    | CHAVE_DIREITA {printf("}");}
 ;
 
-
-  
+Retorno:
+   RETORNE Expressao PONTO_E_VIRGULA{ printf("return %.2f;\n", $2); }
+   | RETORNE IDENTIFICADOR PONTO_E_VIRGULA { printf("return %s;\n", buffer); }
+;
+ 
 
 %%
 

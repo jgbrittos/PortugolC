@@ -6,6 +6,10 @@ inteiro principal(){
 
 	inteiro xombi
 
+	caractere xombi
+	
+	real xomba
+
 	xombixombi <- 12
 
 	se 10 > 2
@@ -33,5 +37,13 @@ inteiro principal(){
 	se (10 > 13) { } senao { 17 } 
 
 	se (10 >= 13) { } senao { 18 } 
+
+	return 0;
+
+	retorne 0;
+
+	return xombi;
+
+	retorne xombi;
 
 }

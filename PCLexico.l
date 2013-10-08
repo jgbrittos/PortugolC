@@ -18,7 +18,7 @@ branco [ \t]+
 digito [0-9]
 inteiro {digito}+
 expoente [eE][+-]?{inteiro}
-real {inteiro}("."{inteiro})?{expoente}?
+numero_real {inteiro}("."{inteiro})?{expoente}?
 letra [a-zA-Z]
 caractere [{letra}0-9]
 logico {verdadeiro}|{falso}
@@ -32,25 +32,17 @@ identificador {letra}+
 
 {branco} { /* Nós ignoraremos os espaços em branco */ } 
 
-/*
-{identacao} { 
-	buffer = strcat("\t",yytext);	
-	return(IDENTACAO);
-}
-*/
 
-{real} { 
+{numero_real} { 
 	yylval=atof(yytext); 
-	return(REAL);
+	return(NUMERO_REAL);
 }
-
-
-"inteiro"	return(INTEIRO);
 
 
 "inclua"	return(INCLUA);
 "caractere"	return(CARACTERE);
 "inteiro"	return(INTEIRO);
+"real"		return(REAL);
 
 "enquanto" 	return(ENQUANTO);
 "se" 		return(SE);
@@ -63,6 +55,7 @@ identificador {letra}+
 
 "pare"		return(PARE);
 "retorne"	return(RETORNE);
+"return"	return(RETORNE);
 
 "capte"		return(CAPTE);
 
