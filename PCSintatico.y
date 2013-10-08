@@ -12,13 +12,13 @@ extern buffer[];
 
 %}
 
-%token INTEIRO REAL CARACTERE PALAVRA LOGICA
+%token INTEIRO REAL CARACTERE
 
 %token ATRIBUICAO DIFERENTE IDENTIFICADOR
 %token MAIS MENOS 
 %token ASTERISCO BARRA POTENCIA
 
-%token FIM_LINHA
+%token FIM_LINHA IDENTACAO
 
 %token E OU
 %token MAIS_ATRIBUICAO MENOS_ATRIBUICAO 
@@ -34,7 +34,7 @@ extern buffer[];
 %token COLCHETE_ESQUERDO COLCHETE_DIREITO
 %token PARENTESIS_ESQUERDO PARENTESIS_DIREITO
 
-%token INCLUA
+%token INCLUA PRINCIPAL
 
 /*ESTRUTURA DE ENTRADA E SAIDA*/
 %token CAPTE
@@ -71,32 +71,35 @@ Expressao:
    | SE PARENTESIS_ESQUERDO Expressao MENOR Expressao PARENTESIS_DIREITO{ printf("if(%.2f < %.2f)\n",$3, $5); }
    | SE PARENTESIS_ESQUERDO Expressao MENOR_IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f <= %.2f)\n",$3, $5); }
 
-/*
-   | SE Expressao MAIOR Expressao SENAO Expressao MENOR Expressao { printf("if(%.2f > %.2f) {} else {%.2f < %.2f}", $2,$4,$6,$8); }
-
    | SE Expressao MAIOR Expressao CHAVE_ESQUERDA CHAVE_DIREITA 
-	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f) else\n",$3, $5); }
+	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f) else {%.2f}\n",$3, $5, $9); }
    | SE Expressao MAIOR_IGUAL Expressao CHAVE_ESQUERDA 	CHAVE_DIREITA 
-	SENAO CHAVE_ESQUERDA Expressao  CHAVE_DIREITA { printf("if(%.2f >= %.2f) else\n",$3, $5); }
+	SENAO CHAVE_ESQUERDA Expressao  CHAVE_DIREITA { printf("if(%.2f >= %.2f) else {%.2f}\n",$3, $5, $9); }
    | SE PARENTESIS_ESQUERDO Expressao MAIOR Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA CHAVE_DIREITA
-	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f) else \n",$3, $5); }
+	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f) else {%.2f}\n",$3, $5, $11); }
    | SE PARENTESIS_ESQUERDO Expressao MAIOR_IGUAL Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA CHAVE_DIREITA 
-	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f >= %.2f) else\n",$3, $5); }
-*/
+	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f >= %.2f) else {%.2f}\n",$3, $5, $11); }
+
    | SE Expressao IGUAL Expressao { printf("if(%.2f == %.2f)\n",$2, $4); }
    | SE PARENTESIS_ESQUERDO Expressao IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f == %.2f)\n",$3, $5); }
 
    | CAPTE Expressao { printf("scanf(%.2f, &x);\n", $2); }
    | CAPTE PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA { printf("scanf(%%d, &x);\n", $3); }
 
-   | INCLUA MENOR Expressao MAIOR { printf("include <%.2f>\n", $3) ; }
+   | INCLUA MENOR IDENTIFICADOR MAIOR { printf("include <%s.h>\n", buffer); }
    ;
 
 Tipo:
-    INTEIRO Expressao { printf("int %.2f\n", $2); } 
-    | IDENTIFICADOR ATRIBUICAO Expressao { printf("x = %s %.2f;\n", buffer, $3);}   
+   INTEIRO IDENTIFICADOR { printf("int %s;\n", buffer); } 
+   | REAL IDENTIFICADOR { printf("float %s;\n", buffer); } 
+   | CARACTERE IDENTIFICADOR { printf("char %s;\n", buffer); } 
+   | IDENTIFICADOR ATRIBUICAO Expressao { printf("%s = %.2f;\n", buffer, $3);}
+   | INTEIRO PRINCIPAL PARENTESIS_ESQUERDO PARENTESIS_DIREITO CHAVE_ESQUERDA { printf("int main(){\n", buffer, $3);}
+   | CHAVE_DIREITA {printf("}");}
 ;
 
+
+  
 
 %%
 

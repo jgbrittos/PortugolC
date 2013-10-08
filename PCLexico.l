@@ -2,8 +2,10 @@
 #include "global.h"
 #include "sintatico.h"
 #include <stdlib.h>
+#include <string.h>
 #define YY_DECL extern int yylex()
-char buffer[];
+char buffer[50];
+//char *buffer;
 %}
 
 /* This tells flex to read only one input file */
@@ -12,6 +14,7 @@ char buffer[];
 falso [0fF]|"falso"
 verdadeiro [1vV]|"verdadeiro"
 branco [ \t]+
+/*identacao [\t]+ */
 digito [0-9]
 inteiro {digito}+
 expoente [eE][+-]?{inteiro}
@@ -28,6 +31,13 @@ identificador {letra}+
 %%
 
 {branco} { /* Nós ignoraremos os espaços em branco */ } 
+
+/*
+{identacao} { 
+	buffer = strcat("\t",yytext);	
+	return(IDENTACAO);
+}
+*/
 
 {real} { 
 	yylval=atof(yytext); 
@@ -96,10 +106,20 @@ identificador {letra}+
 "[" 		return(COLCHETE_ESQUERDO);
 "]" 		return(COLCHETE_DIREITO);
 
+"main"		return(PRINCIPAL);
+"principal"	return(PRINCIPAL);
 
 "\n" 		return(FIM_LINHA);
 
 {identificador} { 
+	/*char c = ' ';
+	int i = 0;
+	while(c != '\0'){
+		if(yytext[i] == '\0')
+			break;
+		i++;
+	}
+	buffer = (char *) calloc(i,(sizeof(char)));*/
 	strcpy(buffer, yytext);
 	return IDENTIFICADOR; 
 }
