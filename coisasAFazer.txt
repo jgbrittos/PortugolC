@@ -59,3 +59,10 @@ ponteiro inteiro *p;
 
 
 "%" return(PORCENTAGEM);
+
+
+
+
+
+Fazer função contador de linha e /t
+fazer função geral para verificação de tipos
