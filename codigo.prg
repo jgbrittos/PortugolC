@@ -19,8 +19,6 @@ inteiro principal(){
 	escreva NumeroB;
 	leia numeroB;
 
-	resultado <- numeroA + numeroB;
-
 	retorne 0;
 
 }

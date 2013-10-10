@@ -92,7 +92,6 @@ Tipo:
 
 Expressao:
 	NUMERO_REAL { $$=$1; }
-	//| NUMERO_INTEIRO { $$=$1; } 
 ;
 
 LeituraEscrita:

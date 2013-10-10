@@ -7,6 +7,7 @@
 int main(){
 	int numeroA;
 	int numeroB;
+	int resultado;
 	printf("NumeroA \n");
 	scanf("%d", &numeroA);
 	printf("NumeroB \n");
