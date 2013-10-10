@@ -14,7 +14,6 @@ char buffer[50];
 falso [0fF]|"falso"
 verdadeiro [1vV]|"verdadeiro"
 branco [ \t]+
-/*identacao [\t]+ */
 digito [0-9]
 inteiro {digito}+
 expoente [eE][+-]?{inteiro}
@@ -24,14 +23,11 @@ caractere [{letra}0-9]
 logico {verdadeiro}|{falso}
 indefinido "indefinido"
 
-identificador {letra}+
-
-/*identificador [_{letra}]([_{letra}|{digito}])* */
+identificador {letra}+|{letra}+_{letra}+|_{letra}+
 
 %%
 
 {branco} { /* Nós ignoraremos os espaços em branco */ } 
-
 
 {numero_real} { 
 	yylval=atof(yytext); 
@@ -40,6 +36,8 @@ identificador {letra}+
 
 
 "inclua"	return(INCLUA);
+"defina"	return(DEFINA);
+
 "caractere"	return(CARACTERE);
 "inteiro"	return(INTEIRO);
 "real"		return(REAL);
@@ -57,7 +55,8 @@ identificador {letra}+
 "retorne"	return(RETORNE);
 "return"	return(RETORNE);
 
-"capte"		return(CAPTE);
+"leia"		return(LEIA);
+"escreva"	return(ESCREVA);
 
 "+" 		return(MAIS);
 "-" 		return(MENOS);
@@ -88,10 +87,11 @@ identificador {letra}+
 "|" 		return(BARRA_VERTICAL);
 "&" 		return(E_COMERCIAL);
 
+"//"		return(COMENTARIO);
+
 ":" 		return(DOIS_PONTOS);	/* para a futura identação se der tempo */
 ";" 		return(PONTO_E_VIRGULA);
 ","		return(VIRGULA);
-
 "(" 		return(PARENTESIS_ESQUERDO);
 ")" 		return(PARENTESIS_DIREITO);
 "{" 		return(CHAVE_ESQUERDA);
