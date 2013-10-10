@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define YY_DECL extern int yylex()
-char buffer[50];
+char buffer[100];
 //char *buffer;
 %}
 
@@ -33,7 +33,6 @@ identificador {letra}+|{letra}+_{letra}+|_{letra}+
 	yylval=atof(yytext); 
 	return(NUMERO_REAL);
 }
-
 
 "inclua"	return(INCLUA);
 "defina"	return(DEFINA);

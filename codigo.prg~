@@ -4,7 +4,7 @@ inclua <stdio>
 
 defina MAX 3
 defina MAX_SIZE 10
-defina _SIZE 10
+defina _SIZE 15
 
 
 inteiro principal(){
@@ -12,8 +12,12 @@ inteiro principal(){
 	inteiro numeroA;
 	inteiro numeroB;
 
-	
-	
+	escreva NumeroA;
+	leia numeroA;
+
+	escreva NumeroB;
+	leia numeroB;
+
 	retorne 0;
 
 }

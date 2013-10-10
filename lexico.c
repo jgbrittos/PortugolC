@@ -610,7 +610,7 @@ char *yytext;
 #include <stdlib.h>
 #include <string.h>
 #define YY_DECL extern int yylex()
-char buffer[50];
+char buffer[100];
 //char *buffer;
 /* This tells flex to read only one input file */
 #line 617 "lex.yy.c"
@@ -901,293 +901,293 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 38 "PCLexico.l"
+#line 37 "PCLexico.l"
 return(INCLUA);
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 39 "PCLexico.l"
+#line 38 "PCLexico.l"
 return(DEFINA);
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 41 "PCLexico.l"
+#line 40 "PCLexico.l"
 return(CARACTERE);
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 42 "PCLexico.l"
+#line 41 "PCLexico.l"
 return(INTEIRO);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 43 "PCLexico.l"
+#line 42 "PCLexico.l"
 return(REAL);
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 45 "PCLexico.l"
+#line 44 "PCLexico.l"
 return(ENQUANTO);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 46 "PCLexico.l"
+#line 45 "PCLexico.l"
 return(SE);
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 47 "PCLexico.l"
+#line 46 "PCLexico.l"
 return(SE);
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 48 "PCLexico.l"
+#line 47 "PCLexico.l"
 return(SENAO);
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 49 "PCLexico.l"
+#line 48 "PCLexico.l"
 return(SENAO);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 50 "PCLexico.l"
+#line 49 "PCLexico.l"
 return(PARA);
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 51 "PCLexico.l"
+#line 50 "PCLexico.l"
 return(REPITA);
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 52 "PCLexico.l"
+#line 51 "PCLexico.l"
 return(REPITA);
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 54 "PCLexico.l"
+#line 53 "PCLexico.l"
 return(PARE);
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 55 "PCLexico.l"
+#line 54 "PCLexico.l"
 return(RETORNE);
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 56 "PCLexico.l"
+#line 55 "PCLexico.l"
 return(RETORNE);
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 58 "PCLexico.l"
+#line 57 "PCLexico.l"
 return(LEIA);
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 59 "PCLexico.l"
+#line 58 "PCLexico.l"
 return(ESCREVA);
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 61 "PCLexico.l"
+#line 60 "PCLexico.l"
 return(MAIS);
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 62 "PCLexico.l"
+#line 61 "PCLexico.l"
 return(MENOS);
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 63 "PCLexico.l"
+#line 62 "PCLexico.l"
 return(ASTERISCO);
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 64 "PCLexico.l"
+#line 63 "PCLexico.l"
 return(BARRA);
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 65 "PCLexico.l"
+#line 64 "PCLexico.l"
 return(POTENCIA);
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 67 "PCLexico.l"
+#line 66 "PCLexico.l"
 return(ATRIBUICAO);
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 68 "PCLexico.l"
+#line 67 "PCLexico.l"
 return(ATRIBUICAO);
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 69 "PCLexico.l"
+#line 68 "PCLexico.l"
 return(DIFERENTE);
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 70 "PCLexico.l"
+#line 69 "PCLexico.l"
 return(DIFERENTE);
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 71 "PCLexico.l"
+#line 70 "PCLexico.l"
 return(E);
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 72 "PCLexico.l"
+#line 71 "PCLexico.l"
 return(OU);
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 73 "PCLexico.l"
+#line 72 "PCLexico.l"
 return(MAIS_ATRIBUICAO);
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 74 "PCLexico.l"
+#line 73 "PCLexico.l"
 return(MENOS_ATRIBUICAO);
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 75 "PCLexico.l"
+#line 74 "PCLexico.l"
 return(ASTERISCO_ATRIBUICAO);
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 76 "PCLexico.l"
+#line 75 "PCLexico.l"
 return(BARRA_ATRIBUICAO);
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 78 "PCLexico.l"
+#line 77 "PCLexico.l"
 return(MENOR);
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 79 "PCLexico.l"
+#line 78 "PCLexico.l"
 return(MENOR);
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 80 "PCLexico.l"
+#line 79 "PCLexico.l"
 return(MENOR_IGUAL);
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 81 "PCLexico.l"
+#line 80 "PCLexico.l"
 return(MAIOR);
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 82 "PCLexico.l"
+#line 81 "PCLexico.l"
 return(MAIOR);
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 83 "PCLexico.l"
+#line 82 "PCLexico.l"
 return(MAIOR_IGUAL);
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 84 "PCLexico.l"
+#line 83 "PCLexico.l"
 return(IGUAL);
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 85 "PCLexico.l"
+#line 84 "PCLexico.l"
 return(IGUAL);
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 86 "PCLexico.l"
+#line 85 "PCLexico.l"
 return(EXCLAMACAO);
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 87 "PCLexico.l"
+#line 86 "PCLexico.l"
 return(BARRA_VERTICAL);
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 88 "PCLexico.l"
+#line 87 "PCLexico.l"
 return(E_COMERCIAL);
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 90 "PCLexico.l"
+#line 89 "PCLexico.l"
 return(COMENTARIO);
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 92 "PCLexico.l"
+#line 91 "PCLexico.l"
 return(DOIS_PONTOS);	/* para a futura identação se der tempo */
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 93 "PCLexico.l"
+#line 92 "PCLexico.l"
 return(PONTO_E_VIRGULA);
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 94 "PCLexico.l"
+#line 93 "PCLexico.l"
 return(VIRGULA);
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 95 "PCLexico.l"
+#line 94 "PCLexico.l"
 return(PARENTESIS_ESQUERDO);
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 96 "PCLexico.l"
+#line 95 "PCLexico.l"
 return(PARENTESIS_DIREITO);
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 97 "PCLexico.l"
+#line 96 "PCLexico.l"
 return(CHAVE_ESQUERDA);
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 98 "PCLexico.l"
+#line 97 "PCLexico.l"
 return(CHAVE_DIREITA);
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 99 "PCLexico.l"
+#line 98 "PCLexico.l"
 return(COLCHETE_ESQUERDO);
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 100 "PCLexico.l"
+#line 99 "PCLexico.l"
 return(COLCHETE_DIREITO);
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 102 "PCLexico.l"
+#line 101 "PCLexico.l"
 return(PRINCIPAL);
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 103 "PCLexico.l"
+#line 102 "PCLexico.l"
 return(PRINCIPAL);
 	YY_BREAK
 case 59:
 /* rule 59 can match eol */
 YY_RULE_SETUP
-#line 105 "PCLexico.l"
+#line 104 "PCLexico.l"
 return(FIM_LINHA);
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 107 "PCLexico.l"
+#line 106 "PCLexico.l"
 { 
 	/*char c = ' ';
 	int i = 0;
@@ -1203,7 +1203,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 121 "PCLexico.l"
+#line 120 "PCLexico.l"
 ECHO;
 	YY_BREAK
 #line 1210 "lex.yy.c"
@@ -2204,7 +2204,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 121 "PCLexico.l"
+#line 120 "PCLexico.l"
 
 
 

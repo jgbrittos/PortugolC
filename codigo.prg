@@ -11,9 +11,16 @@ inteiro principal(){
 
 	inteiro numeroA;
 	inteiro numeroB;
+	inteiro resultado;
 
-	
-	
+	escreva NumeroA;
+	leia numeroA;
+
+	escreva NumeroB;
+	leia numeroB;
+
+	resultado <- numeroA + numeroB;
+
 	retorne 0;
 
 }

@@ -63,6 +63,7 @@ Linha:
 	| Comentario FIM_LINHA
 	| Condicional FIM_LINHA
 	| InclusaoDefinicao FIM_LINHA
+	| LeituraEscrita FIM_LINHA
 ;
 
 Comentario:
@@ -71,17 +72,39 @@ Comentario:
 	| COMENTARIO Retorno
 ;
 
-
 InclusaoDefinicao:
-	INCLUA MENOR IDENTIFICADOR MAIOR { printf("include <%s.h>\n", buffer); }
+	INCLUA MENOR IDENTIFICADOR MAIOR { printf("#include <%s.h>\n", buffer); }
 	| DEFINA IDENTIFICADOR Expressao { printf("#define %s %.2f\n", buffer, $3); }
 	//| DEFINA IDENTIFICADOR IDENTIFICADOR { printf("#define %s %s", buffer, buffer); }
+;
+
+Principal:
+	INTEIRO PRINCIPAL PARENTESIS_ESQUERDO PARENTESIS_DIREITO CHAVE_ESQUERDA { printf("int main(){\n");}
+	| CHAVE_DIREITA {printf("}");}
+;
+
+Tipo:
+	INTEIRO IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tint %s;\n", buffer); } 
+	| REAL IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tfloat %s;\n", buffer); } 
+	| CARACTERE IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tchar %s;\n", buffer); } 
+	| IDENTIFICADOR ATRIBUICAO Expressao PONTO_E_VIRGULA{ printf("%s = %.2f;\n", buffer, $3);}
 ;
 
 Expressao:
 	NUMERO_REAL { $$=$1; }
 	//| NUMERO_INTEIRO { $$=$1; } 
-	//| FRASE
+;
+
+LeituraEscrita:
+//	ESCREVA Expressao PONTO_E_VIRGULA{ printf("printf(%.2f);", $2); }
+//	| ESCREVA PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA{ printf("printf(%.2f);", $2); }
+
+	ESCREVA IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tprintf(\"%s \\n\");\n", buffer); }
+//	| ESCREVA PARENTESIS_ESQUERDO FRASE PARENTESIS_DIREITO PONTO_E_VIRGULA{ printf("printf(\"%s\");", buffer); }
+
+//	| LEIA PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA { printf("scanf(%%d, &x);\n", $3); }
+	| LEIA IDENTIFICADOR PONTO_E_VIRGULA { printf("\tscanf(\"%%d\", &%s);\n", buffer); }
+
 ;
 
 Condicional:
@@ -108,29 +131,18 @@ Condicional:
 	| SE PARENTESIS_ESQUERDO Expressao IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f == %.2f)\n",$3, $5); }
 ;
 
-Tipo:
-	INTEIRO IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tint %s;\n", buffer); } 
-	| REAL IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tfloat %s;\n", buffer); } 
-	| CARACTERE IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tchar %s;\n", buffer); } 
-	| IDENTIFICADOR ATRIBUICAO Expressao PONTO_E_VIRGULA{ printf("%s = %d;\n", buffer, $3);}
-;
-
-Principal:
-	INTEIRO PRINCIPAL PARENTESIS_ESQUERDO PARENTESIS_DIREITO CHAVE_ESQUERDA { printf("int main(){\n");}
-	| CHAVE_DIREITA {printf("}");}
-;
-
-LeituraEscrita:
-	ESCREVA Expressao PONTO_E_VIRGULA{ printf("printf();"); }
-	| ESCREVA PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA{ printf("printf();"); }
-
-	| LEIA PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA { printf("scanf(%%d, &x);\n", $3); }
-	//{ printf("scanf(%.2f, &x);\n", $2); }
-;
-
 Retorno:
-	RETORNE Expressao PONTO_E_VIRGULA{ printf("return %.2f;\n", $2); }
-	| RETORNE IDENTIFICADOR PONTO_E_VIRGULA { printf("return %s;\n", buffer); }
+	RETORNE Expressao PONTO_E_VIRGULA { 
+		int aux=0, aux1=0;
+		aux = $2;
+		aux1 = ceil($2);
+		if(aux == aux1){
+			printf("\treturn %d;\n", $2); 
+		}else{
+			printf("\treturn %.2f;\n", $2); 
+		}
+	}
+	| RETORNE IDENTIFICADOR PONTO_E_VIRGULA { printf("\treturn %s;\n", buffer); }
 ;
  
 
