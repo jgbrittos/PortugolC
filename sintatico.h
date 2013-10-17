@@ -83,11 +83,14 @@
      SE = 301,
      SENAO = 302,
      PARA = 303,
-     PARE = 304,
-     ENQUANTO = 305,
+     DE = 304,
+     ATE = 305,
      FACA = 306,
-     REPITA = 307,
-     RETORNE = 308
+     PASSO = 307,
+     PARE = 308,
+     ENQUANTO = 309,
+     REPITA = 310,
+     RETORNE = 311
    };
 #endif
 

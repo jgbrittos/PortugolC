@@ -3,6 +3,7 @@
 #include "sintatico.h"
 #include <stdlib.h>
 #include <string.h>
+//#include <tabelasimbolos.c>
 #define YY_DECL extern int yylex()
 char buffer[100];
 //char *buffer;
@@ -27,7 +28,7 @@ identificador {letra}+|{letra}+_{letra}+|_{letra}+
 
 %%
 
-{branco} { /* Nós ignoraremos os espaços em branco */ } 
+{branco} { printf("\n");/*Nós ignoraremos o espaço em branco*/ } 
 
 {numero_real} { 
 	yylval=atof(yytext); 
@@ -47,8 +48,11 @@ identificador {letra}+|{letra}+_{letra}+|_{letra}+
 "senao"		return(SENAO);
 "else" 		return(SENAO);
 "para"		return(PARA);
+"de"		return(DE);
+"ate"		return(ATE);
+"passo"		return(PASSO);
+"faca"		return(FACA);
 "repita"	return(REPITA);
-"faca"		return(REPITA);
 
 "pare"		return(PARE);
 "retorne"	return(RETORNE);

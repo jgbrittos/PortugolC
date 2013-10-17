@@ -41,7 +41,7 @@ extern buffer[];
 
 /*SESSAO DE ESTRUTURAS CONDICIONAIS E DE REPETICAO*/
 %token SE SENAO
-%token PARA PARE ENQUANTO FACA REPITA RETORNE
+%token PARA DE ATE FACA PASSO PARE ENQUANTO REPITA RETORNE
 
 %left MAIS MENOS
 %left ASTERISCO BARRA
@@ -55,7 +55,7 @@ Entrada:
 	| Entrada Linha
    	;
 Linha:
-	FIM_LINHA
+	FIM_LINHA {/*printf("\n");*/}
 	| Principal FIM_LINHA
 	| Expressao FIM_LINHA
 	| Tipo FIM_LINHA
@@ -64,6 +64,7 @@ Linha:
 	| Condicional FIM_LINHA
 	| InclusaoDefinicao FIM_LINHA
 	| LeituraEscrita FIM_LINHA
+	| EstruturaRepeticao FIM_LINHA
 ;
 
 Comentario:
@@ -73,21 +74,21 @@ Comentario:
 ;
 
 InclusaoDefinicao:
-	INCLUA MENOR IDENTIFICADOR MAIOR { printf("#include <%s.h>\n", buffer); }
-	| DEFINA IDENTIFICADOR Expressao { printf("#define %s %.2f\n", buffer, $3); }
+	INCLUA MENOR IDENTIFICADOR MAIOR { printf("#include <%s.h>", buffer); }
+	| DEFINA IDENTIFICADOR Expressao { printf("#define %s %.2f", buffer, $3); }
 	//| DEFINA IDENTIFICADOR IDENTIFICADOR { printf("#define %s %s", buffer, buffer); }
 ;
 
 Principal:
-	INTEIRO PRINCIPAL PARENTESIS_ESQUERDO PARENTESIS_DIREITO CHAVE_ESQUERDA { printf("int main(){\n");}
-	| CHAVE_DIREITA {printf("}");}
+	INTEIRO PRINCIPAL PARENTESIS_ESQUERDO PARENTESIS_DIREITO CHAVE_ESQUERDA { printf("int main(){");}
+	| CHAVE_DIREITA FIM_LINHA {printf("\n}");}
 ;
 
 Tipo:
-	INTEIRO IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tint %s;\n", buffer); } 
-	| REAL IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tfloat %s;\n", buffer); } 
-	| CARACTERE IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tchar %s;\n", buffer); } 
-	| IDENTIFICADOR ATRIBUICAO Expressao PONTO_E_VIRGULA{ printf("%s = %.2f;\n", buffer, $3);}
+	INTEIRO IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tint %s;", buffer); } 
+	| REAL IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tfloat %s;", buffer); } 
+	| CARACTERE IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tchar %s;", buffer); } 
+	| IDENTIFICADOR ATRIBUICAO Expressao PONTO_E_VIRGULA{ printf("%s = %.2f;", buffer, $3);}
 ;
 
 Expressao:
@@ -98,36 +99,43 @@ LeituraEscrita:
 //	ESCREVA Expressao PONTO_E_VIRGULA{ printf("printf(%.2f);", $2); }
 //	| ESCREVA PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA{ printf("printf(%.2f);", $2); }
 
-	ESCREVA IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tprintf(\"%s \\n\");\n", buffer); }
+	ESCREVA IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tprintf(\"%s \\n\");", buffer); }
 //	| ESCREVA PARENTESIS_ESQUERDO FRASE PARENTESIS_DIREITO PONTO_E_VIRGULA{ printf("printf(\"%s\");", buffer); }
 
 //	| LEIA PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA { printf("scanf(%%d, &x);\n", $3); }
-	| LEIA IDENTIFICADOR PONTO_E_VIRGULA { printf("\tscanf(\"%%d\", &%s);\n", buffer); }
+	| LEIA IDENTIFICADOR PONTO_E_VIRGULA { printf("\tscanf(\"%%d\", &%s);", buffer); }
 
 ;
 
 Condicional:
-	SE Expressao MAIOR Expressao { printf("if(%.2f > %.2f)\n",$2, $4); }
-	| SE Expressao MAIOR_IGUAL Expressao { printf("if(%.2f >= %.2f)\n",$2, $4); }
-	| SE PARENTESIS_ESQUERDO Expressao MAIOR Expressao PARENTESIS_DIREITO { printf("if(%.2f > %.2f)\n",$3, $5); }
-	| SE PARENTESIS_ESQUERDO Expressao MAIOR_IGUAL Expressao PARENTESIS_DIREITO { printf("if(%.2f >= %.2f)\n",$3, $5); }
+	SE Expressao MAIOR Expressao { printf("if(%.2f > %.2f)",$2, $4); }
+	| SE Expressao MAIOR_IGUAL Expressao { printf("if(%.2f >= %.2f)",$2, $4); }
+	| SE PARENTESIS_ESQUERDO Expressao MAIOR Expressao PARENTESIS_DIREITO { printf("if(%.2f > %.2f)",$3, $5); }
+	| SE PARENTESIS_ESQUERDO Expressao MAIOR_IGUAL Expressao PARENTESIS_DIREITO { printf("if(%.2f >= %.2f)",$3, $5); }
 
-	| SE Expressao MENOR Expressao { printf("if(%.2f < %.2f)\n",$2, $4); }
-	| SE Expressao MENOR_IGUAL Expressao { printf("if(%.2f <= %.2f)\n",$2, $4); }
-	| SE PARENTESIS_ESQUERDO Expressao MENOR Expressao PARENTESIS_DIREITO{ printf("if(%.2f < %.2f)\n",$3, $5); }
-	| SE PARENTESIS_ESQUERDO Expressao MENOR_IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f <= %.2f)\n",$3, $5); }
+	| SE Expressao MENOR Expressao { printf("if(%.2f < %.2f)",$2, $4); }
+	| SE Expressao MENOR_IGUAL Expressao { printf("if(%.2f <= %.2f)",$2, $4); }
+	| SE PARENTESIS_ESQUERDO Expressao MENOR Expressao PARENTESIS_DIREITO{ printf("if(%.2f < %.2f)",$3, $5); }
+	| SE PARENTESIS_ESQUERDO Expressao MENOR_IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f <= %.2f)",$3, $5); }
 
 	| SE Expressao MAIOR Expressao CHAVE_ESQUERDA CHAVE_DIREITA 
-	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f) else {%.2f}\n",$3, $5, $9); }
+	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f) else {%.2f}",$3, $5, $9); }
 	| SE Expressao MAIOR_IGUAL Expressao CHAVE_ESQUERDA 	CHAVE_DIREITA 
-	SENAO CHAVE_ESQUERDA Expressao  CHAVE_DIREITA { printf("if(%.2f >= %.2f) else {%.2f}\n",$3, $5, $9); }
+	SENAO CHAVE_ESQUERDA Expressao  CHAVE_DIREITA { printf("if(%.2f >= %.2f) else {%.2f}",$3, $5, $9); }
 	| SE PARENTESIS_ESQUERDO Expressao MAIOR Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA CHAVE_DIREITA
-	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f) else {%.2f}\n",$3, $5, $11); }
+	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f) else {%.2f}",$3, $5, $11); }
 	| SE PARENTESIS_ESQUERDO Expressao MAIOR_IGUAL Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA CHAVE_DIREITA 
-	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f >= %.2f) else {%.2f}\n",$3, $5, $11); }
+	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f >= %.2f) else {%.2f}",$3, $5, $11); }
 
-	| SE Expressao IGUAL Expressao { printf("if(%.2f == %.2f)\n",$2, $4); }
-	| SE PARENTESIS_ESQUERDO Expressao IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f == %.2f)\n",$3, $5); }
+	| SE Expressao IGUAL Expressao { printf("if(%.2f == %.2f)",$2, $4); }
+	| SE PARENTESIS_ESQUERDO Expressao IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f == %.2f)",$3, $5); }
+;
+
+EstruturaRepeticao:
+	PARA IDENTIFICADOR DE Expressao ATE Expressao FACA { printf("\tfor(%s = %.2f; xomba <= %.2f; xomba++){ ", buffer,$4,$6); }
+	| PARA PARENTESIS_ESQUERDO IDENTIFICADOR DE Expressao ATE Expressao PARENTESIS_DIREITO 
+		FACA { printf("\tfor(%s = %.2f;xombi<= %.2f, xombi++)", buffer, $4,$6);}
+//	| PARA IDENTIFICADOR DE Expressao ATE Expressao PASSO Expressao FACA {}
 ;
 
 Retorno:
@@ -136,12 +144,12 @@ Retorno:
 		aux = $2;
 		aux1 = ceil($2);
 		if(aux == aux1){
-			printf("\treturn %d;\n", $2); 
+			printf("\treturn %d;", $2); 
 		}else{
-			printf("\treturn %.2f;\n", $2); 
+			printf("\treturn %.2f;", $2); 
 		}
 	}
-	| RETORNE IDENTIFICADOR PONTO_E_VIRGULA { printf("\treturn %s;\n", buffer); }
+	| RETORNE IDENTIFICADOR PONTO_E_VIRGULA { printf("\treturn %s;", buffer); }
 ;
  
 
