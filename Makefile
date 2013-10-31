@@ -13,8 +13,7 @@ init: portugolc
 exec: codigo.c
 	gcc codigo.c -o programaC
 	./programaC
-
-clean: 
+clean:
 	rm lexico.* sintatico.* portugolc
 
 
