@@ -19,7 +19,7 @@ int main(){
 
 	int xombi;
 
-	printf("NumeroA \n");
+	printf("numeroA \n");
 
 	scanf("%d", &numeroA);
 
@@ -32,14 +32,7 @@ int main(){
 
 
 
-	for(xombi = 10.00;xombi<= 0.00, xombi++)
-
-
-
-
-
-
-	for(xombi = 10.00; xomba <= 20.00; xomba++){ 
+	for(xombi = 10.00;xombi<= 0.00, xombi++){
 
 	return 0;
 }

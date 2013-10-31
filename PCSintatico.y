@@ -25,7 +25,7 @@ extern buffer[];
 %token ASTERISCO_ATRIBUICAO BARRA_ATRIBUICAO
 
 %token MENOR MAIOR MAIOR_IGUAL MENOR_IGUAL
-%token IGUAL EXCLAMACAO COMENTARIO
+%token IGUAL EXCLAMACAO COMENTARIO FRASE_COMENTARIO
 
 %token E_COMERCIAL BARRA_VERTICAL
 
@@ -55,7 +55,7 @@ Entrada:
 	| Entrada Linha
    	;
 Linha:
-	FIM_LINHA {/*printf("\n");*/}
+	FIM_LINHA
 	| Principal FIM_LINHA
 	| Expressao FIM_LINHA
 	| Tipo FIM_LINHA
@@ -68,9 +68,8 @@ Linha:
 ;
 
 Comentario:
-	COMENTARIO Expressao
-	| COMENTARIO Tipo
-	| COMENTARIO Retorno
+	COMENTARIO Expressao { printf("\t//%.2f", $2); }
+	| COMENTARIO FRASE_COMENTARIO { printf("\t//%s", buffer); }
 ;
 
 InclusaoDefinicao:
@@ -96,15 +95,8 @@ Expressao:
 ;
 
 LeituraEscrita:
-//	ESCREVA Expressao PONTO_E_VIRGULA{ printf("printf(%.2f);", $2); }
-//	| ESCREVA PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA{ printf("printf(%.2f);", $2); }
-
 	ESCREVA IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tprintf(\"%s \\n\");", buffer); }
-//	| ESCREVA PARENTESIS_ESQUERDO FRASE PARENTESIS_DIREITO PONTO_E_VIRGULA{ printf("printf(\"%s\");", buffer); }
-
-//	| LEIA PARENTESIS_ESQUERDO Expressao PARENTESIS_DIREITO PONTO_E_VIRGULA { printf("scanf(%%d, &x);\n", $3); }
 	| LEIA IDENTIFICADOR PONTO_E_VIRGULA { printf("\tscanf(\"%%d\", &%s);", buffer); }
-
 ;
 
 Condicional:
@@ -133,9 +125,8 @@ Condicional:
 
 EstruturaRepeticao:
 	PARA IDENTIFICADOR DE Expressao ATE Expressao FACA { printf("\tfor(%s = %.2f; xomba <= %.2f; xomba++){ ", buffer,$4,$6); }
-	| PARA PARENTESIS_ESQUERDO IDENTIFICADOR DE Expressao ATE Expressao PARENTESIS_DIREITO 
-		FACA { printf("\tfor(%s = %.2f;xombi<= %.2f, xombi++)", buffer, $4,$6);}
-//	| PARA IDENTIFICADOR DE Expressao ATE Expressao PASSO Expressao FACA {}
+	| PARA PARENTESIS_ESQUERDO IDENTIFICADOR DE Expressao ATE Expressao PARENTESIS_DIREITO FACA 
+	{ printf("\tfor(%s = %.2f;xombi<= %.2f, xombi++){", buffer, $4,$6);}
 ;
 
 Retorno:

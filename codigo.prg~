@@ -13,13 +13,11 @@ inteiro principal(){
 	inteiro resultado;
 	inteiro xombi;
 
-	escreva NumeroA;
+	escreva numeroA;
 	leia numeroA;
 
 	escreva NumeroB;
 	leia numeroB;
-
-	para xombi de 0 ate 10 faca
 
 	retorne 0;
 

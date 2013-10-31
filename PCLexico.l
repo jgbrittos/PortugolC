@@ -23,7 +23,6 @@ letra [a-zA-Z]
 caractere [{letra}0-9]
 logico {verdadeiro}|{falso}
 indefinido "indefinido"
-
 identificador {letra}+|{letra}+_{letra}+|_{letra}+
 
 %%
