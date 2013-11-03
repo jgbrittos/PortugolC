@@ -105,6 +105,7 @@ identificador {letra}+|{letra}+_{letra}+|_{letra}+
 "principal"	return(PRINCIPAL);
 
 "\n" 		return(FIM_LINHA);
+"\t"		return(TABULACAO);
 
 {identificador} { 
 	/*char c = ' ';

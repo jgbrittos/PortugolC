@@ -32,7 +32,17 @@ int main(){
 
 
 
-	for(xombi = 10.00;xombi<= 0.00, xombi++){
+
+	for (xombi = 0.00; xombi <= 10.00; xombi++) { <-- ESTA CHAVE ESTÁ CERTA?!??!??
+
+
+
+
+
+
+	for (xombi = 0.00; xombi <= 10; xombi++) {
+
+}
 
 	return 0;
 }
