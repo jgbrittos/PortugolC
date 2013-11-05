@@ -33,9 +33,8 @@ int main(){
 
 
 
-	for (xombi = 0.00; xombi <= 10.00; xombi++) { <-- ESTA CHAVE ESTÁ CERTA?!??!??
+	for (xombi = 0.00; xombi <= 10.00; xombi++) {
 		
-	printf("xombi ");
 	}	
 
 

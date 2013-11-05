@@ -1728,7 +1728,7 @@ yyreduce:
 
 /* Line 1806 of yacc.c  */
 #line 132 "PCSintatico.y"
-    { printf("\tfor (%s = %.2f; xombi <= %.2f; xombi++) { <-- ESTA CHAVE ESTÁ CERTA?!??!??", buffer, (yyvsp[(6) - (9)]),(yyvsp[(4) - (9)]));}
+    { printf("\tfor (%s = %.2f; xombi <= %.2f; xombi++) {", buffer, (yyvsp[(6) - (9)]),(yyvsp[(4) - (9)]));}
     break;
 
   case 44:
