@@ -3,38 +3,40 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 #define MAX 3.00
 
 #define _SIZE 15.00
 
 #define MAX_SIZE 10.00
+
 int main(){
 
-
-	int numeroA;
-
-	int numeroB;
-
-	int resultado;
-
+	
+	int numeroA;	
+	int numeroB;	
+	int resultado;	
 	int xombi;
-
-	printf("numeroA \n");
-
+	
+	printf("numeroA ");
+	
 	scanf("%d", &numeroA);
 
-	printf("NumeroB \n");
+	
+	printf("NumeroB ");
+	
+	scanf("%d", &numeroB);	
 
-	scanf("%d", &numeroB);
-
-
+	
 
 
 
 
 
 	for (xombi = 0.00; xombi <= 10.00; xombi++) { <-- ESTA CHAVE ESTÁ CERTA?!??!??
-
+		
+	printf("xombi ");
+	}	
 
 
 
@@ -42,7 +44,7 @@ int main(){
 
 	for (xombi = 0.00; xombi <= 10; xombi++) {
 
-}
-
+	}	
 	return 0;
+
 }

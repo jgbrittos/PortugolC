@@ -20,6 +20,8 @@ inteiro principal(){
 	leia numeroB;	
 
 	para (xombi de 0 ate 10) faca
+		
+	}
 
 	para (xombi de 0 ate 10) {
 

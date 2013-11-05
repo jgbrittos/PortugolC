@@ -11,10 +11,11 @@ char buffer[100];
 
 /* This tells flex to read only one input file */
 %option noyywrap
+%option nounput
 
 falso [0fF]|"falso"
 verdadeiro [1vV]|"verdadeiro"
-branco [ \t]+
+branco [ ]+
 digito [0-9]
 inteiro {digito}+
 expoente [eE][+-]?{inteiro}

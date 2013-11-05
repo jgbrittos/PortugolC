@@ -14,6 +14,10 @@ extern buffer[];
 
 %token INTEIRO REAL NUMERO_REAL CARACTERE
 
+/*SESSAO DE ESTRUTURAS CONDICIONAIS E DE REPETICAO*/
+%token SE SENAO
+%token PARA DE ATE FACA PASSO PARE ENQUANTO REPITA RETORNE
+
 %token ATRIBUICAO DIFERENTE IDENTIFICADOR
 %token MAIS MENOS 
 %token ASTERISCO BARRA POTENCIA
@@ -39,10 +43,6 @@ extern buffer[];
 /*ESTRUTURA DE ENTRADA E SAIDA*/
 %token LEIA ESCREVA
 
-/*SESSAO DE ESTRUTURAS CONDICIONAIS E DE REPETICAO*/
-%token SE SENAO
-%token PARA DE ATE FACA PASSO PARE ENQUANTO REPITA RETORNE
-
 %left MAIS MENOS
 %left ASTERISCO BARRA
 
@@ -55,21 +55,17 @@ Entrada:
 	| Entrada Linha
    	;
 Linha:
-	FIM_LINHA
-	| Principal FIM_LINHA
-	| Expressao FIM_LINHA
-	| Tipo FIM_LINHA
-	| Retorno FIM_LINHA
+	TABULACAO { printf("\t"); }
+	| FIM_LINHA { printf("\n"); }
+	| Principal FIM_LINHA 
+	| Expressao FIM_LINHA FIM_LINHA
+	| Tipo FIM_LINHA 
+	| Retorno 
 	| Comentario FIM_LINHA
 	| Condicional FIM_LINHA
-	| InclusaoDefinicao FIM_LINHA
-	| LeituraEscrita FIM_LINHA
-	| EstruturaRepeticao FIM_LINHA
-;
-
-Comentario:
-	COMENTARIO Expressao { printf("\t//%.2f", $2); }
-	| COMENTARIO FRASE_COMENTARIO { printf("\t//%s", buffer); }
+	| InclusaoDefinicao FIM_LINHA 
+	| LeituraEscrita 
+	| EstruturaRepeticao 
 ;
 
 InclusaoDefinicao:
@@ -78,9 +74,16 @@ InclusaoDefinicao:
 	//| DEFINA IDENTIFICADOR IDENTIFICADOR { printf("#define %s %s", buffer, buffer); }
 ;
 
+Comentario:
+	COMENTARIO Expressao { printf("\t//%.2f", $2); }
+	| COMENTARIO FRASE_COMENTARIO { printf("\t//%s", buffer); }
+;
+
+
+
 Principal:
 	INTEIRO PRINCIPAL PARENTESIS_ESQUERDO PARENTESIS_DIREITO CHAVE_ESQUERDA { printf("int main(){");}
-	| CHAVE_DIREITA FIM_LINHA {printf("\n}");}
+	| CHAVE_DIREITA FIM_LINHA {printf("}");}
 ;
 
 Tipo:
@@ -95,7 +98,7 @@ Expressao:
 ;
 
 LeituraEscrita:
-	ESCREVA IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tprintf(\"%s \\n\");", buffer); }
+	ESCREVA IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tprintf(\"%s \");", buffer); }
 	| LEIA IDENTIFICADOR PONTO_E_VIRGULA { printf("\tscanf(\"%%d\", &%s);", buffer); }
 ;
 
@@ -149,7 +152,7 @@ Retorno:
 %%
 
 int yyerror(char *s) {
-   printf("%s\n",s);
+   printf("%s",s);
 }
 
 int main() {
