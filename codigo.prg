@@ -27,6 +27,10 @@ inteiro principal(){
 
 	}
 
+	enquanto xombi != 0 faca
+
+	enquanto xombi = 0 {
+
 	retorne 0;
 
 }

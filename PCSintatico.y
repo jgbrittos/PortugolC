@@ -128,10 +128,18 @@ Condicional:
 
 EstruturaRepeticao:
 	PARA IDENTIFICADOR DE Expressao ATE Expressao FACA { printf("\tfor(%s = %.2f; xomba <= %.2f; xomba++){ ", buffer,$4,$6); }
-	| PARA PARENTESIS_ESQUERDO IDENTIFICADOR DE Expressao ATE Expressao PARENTESIS_DIREITO FACA 
+	| PARA PARENTESIS_ESQUERDO IDENTIFICADOR DE Expressao ATE Expressao PARENTESIS_DIREITO FACA
 	{ printf("\tfor (%s = %.2f; xombi <= %.2f; xombi++) {", buffer, $6,$4);}
 	| PARA PARENTESIS_ESQUERDO IDENTIFICADOR DE Expressao ATE Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA
 	{ printf("\tfor (%s = %.2f; xombi <= %2.f; xombi++) {", buffer, $6,$4);}
+	| ENQUANTO IDENTIFICADOR DIFERENTE Expressao FACA 
+	{ printf("\t while (%s != %.2f) {", buffer, $4 );}
+	| ENQUANTO IDENTIFICADOR IGUAL Expressao FACA 
+	{ printf("\t while (%s == %.2f) {", buffer, $4 );}
+	| ENQUANTO IDENTIFICADOR DIFERENTE Expressao CHAVE_ESQUERDA 
+	{ printf("\t while (%s != %.2f) {", buffer, $4 );}
+	| ENQUANTO IDENTIFICADOR IGUAL Expressao CHAVE_ESQUERDA 
+	{ printf("\t while (%s == %.2f) {", buffer, $4 );}
 ;
 
 Retorno:

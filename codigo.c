@@ -44,6 +44,18 @@ int main(){
 	for (xombi = 0.00; xombi <= 10; xombi++) {
 
 	}	
+
+
+
+	 while (xombi != 0.00) {
+
+	
+
+
+
+	 while (xombi == 0.00) {
+
+	
 	return 0;
 
 }
