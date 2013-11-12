@@ -9,7 +9,7 @@ defina MAX_SIZE 10
 inteiro principal(){
  
 	inteiro numeroA;
-	inteiro numeroB;
+	real numeroB;
 	inteiro resultado;
 	inteiro xombi;
 
@@ -20,8 +20,6 @@ inteiro principal(){
 	leia numeroB;	
 
 	para (xombi de 0 ate 10) faca
-		
-	}
 
 	para (xombi de 0 ate 10) {
 
@@ -30,6 +28,8 @@ inteiro principal(){
 	enquanto xombi != 0 faca
 
 	enquanto xombi = 0 {
+
+	}
 
 	retorne 0;
 

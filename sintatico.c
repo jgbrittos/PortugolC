@@ -503,11 +503,11 @@ static const yytype_int8 yyrhs[] =
 static const yytype_uint8 yyrline[] =
 {
        0,    53,    53,    55,    58,    59,    60,    61,    62,    63,
-      64,    65,    66,    67,    68,    72,    73,    78,    79,    85,
-      86,    90,    91,    92,    93,    97,   101,   102,   106,   107,
-     108,   109,   111,   112,   113,   114,   116,   118,   120,   122,
-     125,   126,   130,   131,   133,   135,   137,   139,   141,   146,
-     156
+      64,    65,    66,    67,    68,    72,    73,    77,    78,    84,
+      85,    89,    90,    91,    92,    96,   100,   101,   105,   106,
+     107,   108,   110,   111,   112,   113,   115,   117,   119,   121,
+     124,   125,   129,   130,   132,   134,   136,   138,   140,   145,
+     155
 };
 #endif
 
@@ -1556,231 +1556,231 @@ yyreduce:
   case 17:
 
 /* Line 1806 of yacc.c  */
-#line 78 "PCSintatico.y"
+#line 77 "PCSintatico.y"
     { printf("\t//%.2f", (yyvsp[(2) - (2)])); }
     break;
 
   case 18:
 
 /* Line 1806 of yacc.c  */
-#line 79 "PCSintatico.y"
+#line 78 "PCSintatico.y"
     { printf("\t//%s", buffer); }
     break;
 
   case 19:
 
 /* Line 1806 of yacc.c  */
-#line 85 "PCSintatico.y"
+#line 84 "PCSintatico.y"
     { printf("int main(){");}
     break;
 
   case 20:
 
 /* Line 1806 of yacc.c  */
-#line 86 "PCSintatico.y"
+#line 85 "PCSintatico.y"
     {printf("}");}
     break;
 
   case 21:
 
 /* Line 1806 of yacc.c  */
-#line 90 "PCSintatico.y"
+#line 89 "PCSintatico.y"
     { printf("\tint %s;", buffer); }
     break;
 
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 91 "PCSintatico.y"
+#line 90 "PCSintatico.y"
     { printf("\tfloat %s;", buffer); }
     break;
 
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 92 "PCSintatico.y"
+#line 91 "PCSintatico.y"
     { printf("\tchar %s;", buffer); }
     break;
 
   case 24:
 
 /* Line 1806 of yacc.c  */
-#line 93 "PCSintatico.y"
+#line 92 "PCSintatico.y"
     { printf("%s = %.2f;", buffer, (yyvsp[(3) - (4)]));}
     break;
 
   case 25:
 
 /* Line 1806 of yacc.c  */
-#line 97 "PCSintatico.y"
+#line 96 "PCSintatico.y"
     { (yyval)=(yyvsp[(1) - (1)]); }
     break;
 
   case 26:
 
 /* Line 1806 of yacc.c  */
-#line 101 "PCSintatico.y"
+#line 100 "PCSintatico.y"
     { printf("\tprintf(\"%s \");", buffer); }
     break;
 
   case 27:
 
 /* Line 1806 of yacc.c  */
-#line 102 "PCSintatico.y"
+#line 101 "PCSintatico.y"
     { printf("\tscanf(\"%%d\", &%s);", buffer); }
     break;
 
   case 28:
 
 /* Line 1806 of yacc.c  */
-#line 106 "PCSintatico.y"
+#line 105 "PCSintatico.y"
     { printf("if(%.2f > %.2f)",(yyvsp[(2) - (4)]), (yyvsp[(4) - (4)])); }
     break;
 
   case 29:
 
 /* Line 1806 of yacc.c  */
-#line 107 "PCSintatico.y"
+#line 106 "PCSintatico.y"
     { printf("if(%.2f >= %.2f)",(yyvsp[(2) - (4)]), (yyvsp[(4) - (4)])); }
     break;
 
   case 30:
 
 /* Line 1806 of yacc.c  */
-#line 108 "PCSintatico.y"
+#line 107 "PCSintatico.y"
     { printf("if(%.2f > %.2f)",(yyvsp[(3) - (6)]), (yyvsp[(5) - (6)])); }
     break;
 
   case 31:
 
 /* Line 1806 of yacc.c  */
-#line 109 "PCSintatico.y"
+#line 108 "PCSintatico.y"
     { printf("if(%.2f >= %.2f)",(yyvsp[(3) - (6)]), (yyvsp[(5) - (6)])); }
     break;
 
   case 32:
 
 /* Line 1806 of yacc.c  */
-#line 111 "PCSintatico.y"
+#line 110 "PCSintatico.y"
     { printf("if(%.2f < %.2f)",(yyvsp[(2) - (4)]), (yyvsp[(4) - (4)])); }
     break;
 
   case 33:
 
 /* Line 1806 of yacc.c  */
-#line 112 "PCSintatico.y"
+#line 111 "PCSintatico.y"
     { printf("if(%.2f <= %.2f)",(yyvsp[(2) - (4)]), (yyvsp[(4) - (4)])); }
     break;
 
   case 34:
 
 /* Line 1806 of yacc.c  */
-#line 113 "PCSintatico.y"
+#line 112 "PCSintatico.y"
     { printf("if(%.2f < %.2f)",(yyvsp[(3) - (6)]), (yyvsp[(5) - (6)])); }
     break;
 
   case 35:
 
 /* Line 1806 of yacc.c  */
-#line 114 "PCSintatico.y"
+#line 113 "PCSintatico.y"
     { printf("if(%.2f <= %.2f)",(yyvsp[(3) - (6)]), (yyvsp[(5) - (6)])); }
     break;
 
   case 36:
 
 /* Line 1806 of yacc.c  */
-#line 117 "PCSintatico.y"
+#line 116 "PCSintatico.y"
     { printf("if(%.2f > %.2f) else {%.2f}",(yyvsp[(3) - (10)]), (yyvsp[(5) - (10)]), (yyvsp[(9) - (10)])); }
     break;
 
   case 37:
 
 /* Line 1806 of yacc.c  */
-#line 119 "PCSintatico.y"
+#line 118 "PCSintatico.y"
     { printf("if(%.2f >= %.2f) else {%.2f}",(yyvsp[(3) - (10)]), (yyvsp[(5) - (10)]), (yyvsp[(9) - (10)])); }
     break;
 
   case 38:
 
 /* Line 1806 of yacc.c  */
-#line 121 "PCSintatico.y"
+#line 120 "PCSintatico.y"
     { printf("if(%.2f > %.2f) else {%.2f}",(yyvsp[(3) - (12)]), (yyvsp[(5) - (12)]), (yyvsp[(11) - (12)])); }
     break;
 
   case 39:
 
 /* Line 1806 of yacc.c  */
-#line 123 "PCSintatico.y"
+#line 122 "PCSintatico.y"
     { printf("if(%.2f >= %.2f) else {%.2f}",(yyvsp[(3) - (12)]), (yyvsp[(5) - (12)]), (yyvsp[(11) - (12)])); }
     break;
 
   case 40:
 
 /* Line 1806 of yacc.c  */
-#line 125 "PCSintatico.y"
+#line 124 "PCSintatico.y"
     { printf("if(%.2f == %.2f)",(yyvsp[(2) - (4)]), (yyvsp[(4) - (4)])); }
     break;
 
   case 41:
 
 /* Line 1806 of yacc.c  */
-#line 126 "PCSintatico.y"
+#line 125 "PCSintatico.y"
     { printf("if(%.2f == %.2f)",(yyvsp[(3) - (6)]), (yyvsp[(5) - (6)])); }
     break;
 
   case 42:
 
 /* Line 1806 of yacc.c  */
-#line 130 "PCSintatico.y"
+#line 129 "PCSintatico.y"
     { printf("\tfor(%s = %.2f; xomba <= %.2f; xomba++){ ", buffer,(yyvsp[(4) - (7)]),(yyvsp[(6) - (7)])); }
     break;
 
   case 43:
 
 /* Line 1806 of yacc.c  */
-#line 132 "PCSintatico.y"
+#line 131 "PCSintatico.y"
     { printf("\tfor (%s = %.2f; xombi <= %.2f; xombi++) {", buffer, (yyvsp[(6) - (9)]),(yyvsp[(4) - (9)]));}
     break;
 
   case 44:
 
 /* Line 1806 of yacc.c  */
-#line 134 "PCSintatico.y"
+#line 133 "PCSintatico.y"
     { printf("\tfor (%s = %.2f; xombi <= %2.f; xombi++) {", buffer, (yyvsp[(6) - (9)]),(yyvsp[(4) - (9)]));}
     break;
 
   case 45:
 
 /* Line 1806 of yacc.c  */
-#line 136 "PCSintatico.y"
-    { printf("\t while (%s != %.2f) {", buffer, (yyvsp[(4) - (5)]) );}
+#line 135 "PCSintatico.y"
+    { printf("\t while (%s != %.2f) ", buffer, (yyvsp[(4) - (5)]) );}
     break;
 
   case 46:
 
 /* Line 1806 of yacc.c  */
-#line 138 "PCSintatico.y"
-    { printf("\t while (%s == %.2f) {", buffer, (yyvsp[(4) - (5)]) );}
+#line 137 "PCSintatico.y"
+    { printf("\t while (%s == %.2f) ", buffer, (yyvsp[(4) - (5)]) );}
     break;
 
   case 47:
 
 /* Line 1806 of yacc.c  */
-#line 140 "PCSintatico.y"
+#line 139 "PCSintatico.y"
     { printf("\t while (%s != %.2f) {", buffer, (yyvsp[(4) - (5)]) );}
     break;
 
   case 48:
 
 /* Line 1806 of yacc.c  */
-#line 142 "PCSintatico.y"
+#line 141 "PCSintatico.y"
     { printf("\t while (%s == %.2f) {", buffer, (yyvsp[(4) - (5)]) );}
     break;
 
   case 49:
 
 /* Line 1806 of yacc.c  */
-#line 146 "PCSintatico.y"
+#line 145 "PCSintatico.y"
     { 
 		int aux=0, aux1=0;
 		aux = (yyvsp[(2) - (3)]);
@@ -1796,7 +1796,7 @@ yyreduce:
   case 50:
 
 /* Line 1806 of yacc.c  */
-#line 156 "PCSintatico.y"
+#line 155 "PCSintatico.y"
     { printf("\treturn %s;", buffer); }
     break;
 
@@ -2034,7 +2034,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 160 "PCSintatico.y"
+#line 159 "PCSintatico.y"
 
 
 int yyerror(char *s) {

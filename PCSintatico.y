@@ -71,7 +71,6 @@ Linha:
 InclusaoDefinicao:
 	INCLUA MENOR IDENTIFICADOR MAIOR { printf("#include <%s.h>", buffer); }
 	| DEFINA IDENTIFICADOR Expressao { printf("#define %s %.2f", buffer, $3); }
-	//| DEFINA IDENTIFICADOR IDENTIFICADOR { printf("#define %s %s", buffer, buffer); }
 ;
 
 Comentario:
@@ -133,9 +132,9 @@ EstruturaRepeticao:
 	| PARA PARENTESIS_ESQUERDO IDENTIFICADOR DE Expressao ATE Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA
 	{ printf("\tfor (%s = %.2f; xombi <= %2.f; xombi++) {", buffer, $6,$4);}
 	| ENQUANTO IDENTIFICADOR DIFERENTE Expressao FACA 
-	{ printf("\t while (%s != %.2f) {", buffer, $4 );}
+	{ printf("\t while (%s != %.2f) ", buffer, $4 );}
 	| ENQUANTO IDENTIFICADOR IGUAL Expressao FACA 
-	{ printf("\t while (%s == %.2f) {", buffer, $4 );}
+	{ printf("\t while (%s == %.2f) ", buffer, $4 );}
 	| ENQUANTO IDENTIFICADOR DIFERENTE Expressao CHAVE_ESQUERDA 
 	{ printf("\t while (%s != %.2f) {", buffer, $4 );}
 	| ENQUANTO IDENTIFICADOR IGUAL Expressao CHAVE_ESQUERDA 

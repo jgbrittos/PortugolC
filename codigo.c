@@ -14,7 +14,7 @@ int main(){
 
 	
 	int numeroA;	
-	int numeroB;	
+	float numeroB;	
 	int resultado;	
 	int xombi;
 	
@@ -34,8 +34,8 @@ int main(){
 
 
 	for (xombi = 0.00; xombi <= 10.00; xombi++) {
-		
-	}	
+
+	
 
 
 
@@ -47,7 +47,7 @@ int main(){
 
 
 
-	 while (xombi != 0.00) {
+	 while (xombi != 0.00) 
 
 	
 
@@ -55,7 +55,7 @@ int main(){
 
 	 while (xombi == 0.00) {
 
-	
+	}	
 	return 0;
 
 }
