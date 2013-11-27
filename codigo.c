@@ -1,61 +1,51 @@
+#include <math.h>;
+#include <stdlib.h>;
+#include <stdio.h>;
 
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
+						#define MAX 3;
+#define _SIZE 15;
+#define MAX_SIZE 10;
 
+int main() {
 
-#define MAX 3.00
-
-#define _SIZE 15.00
-
-#define MAX_SIZE 10.00
-
-int main(){
-
-	
-	int numeroA;	
-	float numeroB;	
-	int resultado;	
+	int numeroA;
+	float numeroB;
+	char resultado;
 	int xombi;
-	
-	printf("numeroA ");
-	
+
+	printf("numeroA");
 	scanf("%d", &numeroA);
 
-	
-	printf("NumeroB ");
-	
-	scanf("%d", &numeroB);	
+	printf("NumeroB");
+	scanf("%d", &numeroB);
 
-	
+	if(xombi > 1)
+	if(xombi >= 2)
+	if(xombi > 3)
+	if(xombi >= 4)
 
+	if(xombi < 1)
+	if(xombi <= 2)
+	if(xombi < 3)
+	if(xombi <= 4)
 
+	if(xombi == 1)
+	if(xombi == 2)
 
+	for (xombi = 0; xombi <= 10; xombi++) { 
+	}
+	for (xombi = 0; xombi <= 10; xombi++) {
+	}
+	for (xombi = 0; xombi <= 10; xombi++) {
+	}
 
-
-	for (xombi = 0.00; xombi <= 10.00; xombi++) {
-
-	
-
-
-
-
-
-	for (xombi = 0.00; xombi <= 10; xombi++) {
-
-	}	
-
-
-
-	 while (xombi != 0.00) 
-
-	
-
-
-
-	 while (xombi == 0.00) {
-
-	}	
-	return 0;
+	while (xombi != 0) 
+	while (xombi == 0) 
+	while (xombi != 0) {
+	}
+	while (xombi == 0) {
+	}
 
 }
+
+

@@ -4,17 +4,17 @@ portugolc: PCLexico.l PCSintatico.y
 	mv PCSintatico.tab.c sintatico.c
 	flex PCLexico.l
 	mv lex.yy.c lexico.c
-	gcc -o portugolc sintatico.c lexico.c -lm
+	g++ sintatico.c lexico.c -Wall -g -o portugolc -lm
 
 init: portugolc
 	rm codigo.c
-	./portugolc >> codigo.c
+	./portugolc codigo.prg >> codigo.c
 
 exec: codigo.c
 	gcc codigo.c -o programaC
 	./programaC
-	
-clean:
+
+clean: 
 	rm lexico.* sintatico.* portugolc
 
 

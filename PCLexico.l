@@ -1,58 +1,52 @@
 %{
-#include "global.h"
 #include "sintatico.h"
 #include <stdlib.h>
 #include <string.h>
-//#include <tabelasimbolos.c>
 #define YY_DECL extern int yylex()
-char buffer[100];
-//char *buffer;
 %}
 
 /* This tells flex to read only one input file */
 %option noyywrap
 %option nounput
 
+branco [ ]+
 falso [0fF]|"falso"
 verdadeiro [1vV]|"verdadeiro"
-branco [ ]+
+logico {verdadeiro}|{falso}
 digito [0-9]
 inteiro {digito}+
 expoente [eE][+-]?{inteiro}
 numero_real {inteiro}("."{inteiro})?{expoente}?
 letra [a-zA-Z]
 caractere [{letra}0-9]
-logico {verdadeiro}|{falso}
 indefinido "indefinido"
+tipo (caractere|inteiro|real|ponteiro)
 identificador {letra}+|{letra}+_{letra}+|_{letra}+
 
 %%
 
-{branco} { printf("\n");/*Nós ignoraremos o espaço em branco*/ } 
+{branco} {/* Ignorando espacos */}
 
 {numero_real} { 
-	yylval=atof(yytext); 
+	yylval.number = atof(yytext); 
 	return(NUMERO_REAL);
 }
+
+"\t"		return(TABULACAO);
+"\n" 		return(FIM_LINHA);
 
 "inclua"	return(INCLUA);
 "defina"	return(DEFINA);
 
-"caractere"	return(CARACTERE);
-"inteiro"	return(INTEIRO);
-"real"		return(REAL);
-
 "enquanto" 	return(ENQUANTO);
 "se" 		return(SE);
-"if" 		return(SE);
 "senao"		return(SENAO);
 "else" 		return(SENAO);
 "para"		return(PARA);
 "de"		return(DE);
 "ate"		return(ATE);
-"passo"		return(PASSO);
-"faca"		return(FACA);
 "repita"	return(REPITA);
+"faca"		return(FACA);
 
 "pare"		return(PARE);
 "retorne"	return(RETORNE);
@@ -94,7 +88,7 @@ identificador {letra}+|{letra}+_{letra}+|_{letra}+
 
 ":" 		return(DOIS_PONTOS);	/* para a futura identação se der tempo */
 ";" 		return(PONTO_E_VIRGULA);
-","		return(VIRGULA);
+","			return(VIRGULA);
 "(" 		return(PARENTESIS_ESQUERDO);
 ")" 		return(PARENTESIS_DIREITO);
 "{" 		return(CHAVE_ESQUERDA);
@@ -102,22 +96,15 @@ identificador {letra}+|{letra}+_{letra}+|_{letra}+
 "[" 		return(COLCHETE_ESQUERDO);
 "]" 		return(COLCHETE_DIREITO);
 
-"main"		return(PRINCIPAL);
 "principal"	return(PRINCIPAL);
 
-"\n" 		return(FIM_LINHA);
-"\t"		return(TABULACAO);
+{tipo} {
+	yylval.string = strdup(yytext); 
+	return TIPO;
+}
 
 {identificador} { 
-	/*char c = ' ';
-	int i = 0;
-	while(c != '\0'){
-		if(yytext[i] == '\0')
-			break;
-		i++;
-	}
-	buffer = (char *) calloc(i,(sizeof(char)));*/
-	strcpy(buffer, yytext);
+	yylval.string = strdup(yytext);
 	return IDENTIFICADOR; 
 }
 

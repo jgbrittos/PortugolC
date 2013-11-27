@@ -1,24 +1,35 @@
 %{
-#include "global.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <iostream>
+#include <string>
+#include <map>
+
+using namespace std;
 
 // stuff from flex that bison needs to know about:
 extern int yylex();
 extern int yyparse();
 extern FILE *yyin;
-extern buffer[];
+
+void yyerror(const char *s);
+
+map <string,string> dicionario;
 
 %}
 
-%token INTEIRO REAL NUMERO_REAL CARACTERE
+%union {
+	int number;
+	char caracter;
+	char* string;
+}
 
-/*SESSAO DE ESTRUTURAS CONDICIONAIS E DE REPETICAO*/
-%token SE SENAO
-%token PARA DE ATE FACA PASSO PARE ENQUANTO REPITA RETORNE
+%token <string> TIPO
+%token <number> NUMERO_REAL
 
-%token ATRIBUICAO DIFERENTE IDENTIFICADOR
+%token ATRIBUICAO DIFERENTE 
+%token <string> IDENTIFICADOR
 %token MAIS MENOS 
 %token ASTERISCO BARRA POTENCIA
 
@@ -29,7 +40,7 @@ extern buffer[];
 %token ASTERISCO_ATRIBUICAO BARRA_ATRIBUICAO
 
 %token MENOR MAIOR MAIOR_IGUAL MENOR_IGUAL
-%token IGUAL EXCLAMACAO COMENTARIO FRASE_COMENTARIO
+%token IGUAL EXCLAMACAO COMENTARIO 
 
 %token E_COMERCIAL BARRA_VERTICAL
 
@@ -43,6 +54,11 @@ extern buffer[];
 /*ESTRUTURA DE ENTRADA E SAIDA*/
 %token LEIA ESCREVA
 
+/*SESSAO DE ESTRUTURAS CONDICIONAIS E DE REPETICAO*/
+%token SE SENAO
+%token PARA DE ATE PARE ENQUANTO FACA REPITA 
+%token RETORNE
+
 %left MAIS MENOS
 %left ASTERISCO BARRA
 
@@ -54,121 +70,125 @@ Entrada:
 	/* Empty */
 	| Entrada Linha
    	;
+
 Linha:
-	TABULACAO { printf("\t"); }
-	| FIM_LINHA { printf("\n"); }
-	| Principal FIM_LINHA 
-	| Expressao FIM_LINHA FIM_LINHA
-	| Tipo FIM_LINHA 
-	| Retorno 
-	| Comentario FIM_LINHA
-	| Condicional FIM_LINHA
-	| InclusaoDefinicao FIM_LINHA 
-	| LeituraEscrita 
-	| EstruturaRepeticao 
+	TABULACAO { printf("\t"); }	
+	| FIM_LINHA {printf ("\n");}
+	| Condicional
+	| Principal
+	| Tipo
+	| InclusaoDefinicao
+	| LeituraEscrita
+	| EstruturaRepeticao
 ;
 
 InclusaoDefinicao:
-	INCLUA MENOR IDENTIFICADOR MAIOR { printf("#include <%s.h>", buffer); }
-	| DEFINA IDENTIFICADOR Expressao { printf("#define %s %.2f", buffer, $3); }
+	INCLUA MENOR IDENTIFICADOR MAIOR { cout << "#include <" << $3 << ".h>;"; }
+	| DEFINA IDENTIFICADOR NUMERO_REAL { cout << "#define " << $2 << " " << $3 << ";"; }
 ;
-
-Comentario:
-	COMENTARIO Expressao { printf("\t//%.2f", $2); }
-	| COMENTARIO FRASE_COMENTARIO { printf("\t//%s", buffer); }
-;
-
-
 
 Principal:
-	INTEIRO PRINCIPAL PARENTESIS_ESQUERDO PARENTESIS_DIREITO CHAVE_ESQUERDA { printf("int main(){");}
-	| CHAVE_DIREITA FIM_LINHA {printf("}");}
+	TIPO PRINCIPAL PARENTESIS_ESQUERDO PARENTESIS_DIREITO CHAVE_ESQUERDA { cout << dicionario[$1] << " main() {" ;}
+	| CHAVE_DIREITA {printf("}");}
 ;
 
 Tipo:
-	INTEIRO IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tint %s;", buffer); } 
-	| REAL IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tfloat %s;", buffer); } 
-	| CARACTERE IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tchar %s;", buffer); } 
-	| IDENTIFICADOR ATRIBUICAO Expressao PONTO_E_VIRGULA{ printf("%s = %.2f;", buffer, $3);}
-;
-
-Expressao:
-	NUMERO_REAL { $$=$1; }
+	TIPO IDENTIFICADOR PONTO_E_VIRGULA { cout << dicionario[$1] << " " << $2 << ";"; } 
 ;
 
 LeituraEscrita:
-	ESCREVA IDENTIFICADOR PONTO_E_VIRGULA{ printf("\tprintf(\"%s \");", buffer); }
-	| LEIA IDENTIFICADOR PONTO_E_VIRGULA { printf("\tscanf(\"%%d\", &%s);", buffer); }
+	ESCREVA IDENTIFICADOR PONTO_E_VIRGULA{ printf("printf(\"%s\");", $2);  }
+	| LEIA IDENTIFICADOR PONTO_E_VIRGULA { printf("scanf(\"%%d\", &%s);", $2); }
 ;
 
 Condicional:
-	SE Expressao MAIOR Expressao { printf("if(%.2f > %.2f)",$2, $4); }
-	| SE Expressao MAIOR_IGUAL Expressao { printf("if(%.2f >= %.2f)",$2, $4); }
-	| SE PARENTESIS_ESQUERDO Expressao MAIOR Expressao PARENTESIS_DIREITO { printf("if(%.2f > %.2f)",$3, $5); }
-	| SE PARENTESIS_ESQUERDO Expressao MAIOR_IGUAL Expressao PARENTESIS_DIREITO { printf("if(%.2f >= %.2f)",$3, $5); }
+	SE IDENTIFICADOR MAIOR NUMERO_REAL { printf("if(%s > %d)",$2, $4); }
+	| SE IDENTIFICADOR MAIOR_IGUAL NUMERO_REAL { printf("if(%s >= %d)",$2, $4); }
+	| SE PARENTESIS_ESQUERDO IDENTIFICADOR MAIOR NUMERO_REAL PARENTESIS_DIREITO { printf("if(%s > %d)",$3, $5); }
+	| SE PARENTESIS_ESQUERDO IDENTIFICADOR MAIOR_IGUAL NUMERO_REAL PARENTESIS_DIREITO { printf("if(%s >= %d)",$3, $5); }
 
-	| SE Expressao MENOR Expressao { printf("if(%.2f < %.2f)",$2, $4); }
-	| SE Expressao MENOR_IGUAL Expressao { printf("if(%.2f <= %.2f)",$2, $4); }
-	| SE PARENTESIS_ESQUERDO Expressao MENOR Expressao PARENTESIS_DIREITO{ printf("if(%.2f < %.2f)",$3, $5); }
-	| SE PARENTESIS_ESQUERDO Expressao MENOR_IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f <= %.2f)",$3, $5); }
+	| SE IDENTIFICADOR MENOR NUMERO_REAL { printf("if(%s < %d)",$2, $4); }
+	| SE IDENTIFICADOR MENOR_IGUAL NUMERO_REAL { printf("if(%s <= %d)",$2, $4); }
+	| SE PARENTESIS_ESQUERDO IDENTIFICADOR MENOR NUMERO_REAL PARENTESIS_DIREITO{ printf("if(%s < %d)",$3, $5); }
+	| SE PARENTESIS_ESQUERDO IDENTIFICADOR MENOR_IGUAL NUMERO_REAL PARENTESIS_DIREITO{ printf("if(%s <= %d)",$3, $5); }
 
-	| SE Expressao MAIOR Expressao CHAVE_ESQUERDA CHAVE_DIREITA 
-	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f) else {%.2f}",$3, $5, $9); }
-	| SE Expressao MAIOR_IGUAL Expressao CHAVE_ESQUERDA 	CHAVE_DIREITA 
-	SENAO CHAVE_ESQUERDA Expressao  CHAVE_DIREITA { printf("if(%.2f >= %.2f) else {%.2f}",$3, $5, $9); }
-	| SE PARENTESIS_ESQUERDO Expressao MAIOR Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA CHAVE_DIREITA
-	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f) else {%.2f}",$3, $5, $11); }
-	| SE PARENTESIS_ESQUERDO Expressao MAIOR_IGUAL Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA CHAVE_DIREITA 
-	SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f >= %.2f) else {%.2f}",$3, $5, $11); }
+	//| SE IDENTIFICADOR MAIOR NUMERO_REAL CHAVE_ESQUERDA CHAVE_DIREITA 
+	//SENAO CHAVE_ESQUERDA IDENTIFICADOR CHAVE_DIREITA { printf("if(%s > %d) else {%s}",$2, $4, $9); }
+	//| SE Expressao MAIOR_IGUAL Expressao CHAVE_ESQUERDA 	CHAVE_DIREITA 
+	//SENAO CHAVE_ESQUERDA Expressao  CHAVE_DIREITA { printf("if(%.2f >= %.2f) else {%.2f}",$3, $5, $9); }
+	//| SE PARENTESIS_ESQUERDO Expressao MAIOR Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA CHAVE_DIREITA
+	//SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f > %.2f) else {%.2f}",$3, $5, $11); }
+	//| SE PARENTESIS_ESQUERDO Expressao MAIOR_IGUAL Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA CHAVE_DIREITA 
+	//SENAO CHAVE_ESQUERDA Expressao CHAVE_DIREITA { printf("if(%.2f >= %.2f) else {%.2f}",$3, $5, $11); }
 
-	| SE Expressao IGUAL Expressao { printf("if(%.2f == %.2f)",$2, $4); }
-	| SE PARENTESIS_ESQUERDO Expressao IGUAL Expressao PARENTESIS_DIREITO{ printf("if(%.2f == %.2f)",$3, $5); }
+	| SE IDENTIFICADOR IGUAL NUMERO_REAL { printf("if(%s == %d)",$2, $4); }
+	| SE PARENTESIS_ESQUERDO IDENTIFICADOR IGUAL NUMERO_REAL PARENTESIS_DIREITO{ printf("if(%s == %d)",$3, $5); }
 ;
 
 EstruturaRepeticao:
-	PARA IDENTIFICADOR DE Expressao ATE Expressao FACA { printf("\tfor(%s = %.2f; xomba <= %.2f; xomba++){ ", buffer,$4,$6); }
-	| PARA PARENTESIS_ESQUERDO IDENTIFICADOR DE Expressao ATE Expressao PARENTESIS_DIREITO FACA
-	{ printf("\tfor (%s = %.2f; xombi <= %.2f; xombi++) {", buffer, $6,$4);}
-	| PARA PARENTESIS_ESQUERDO IDENTIFICADOR DE Expressao ATE Expressao PARENTESIS_DIREITO CHAVE_ESQUERDA
-	{ printf("\tfor (%s = %.2f; xombi <= %2.f; xombi++) {", buffer, $6,$4);}
-	| ENQUANTO IDENTIFICADOR DIFERENTE Expressao FACA 
-	{ printf("\t while (%s != %.2f) ", buffer, $4 );}
-	| ENQUANTO IDENTIFICADOR IGUAL Expressao FACA 
-	{ printf("\t while (%s == %.2f) ", buffer, $4 );}
-	| ENQUANTO IDENTIFICADOR DIFERENTE Expressao CHAVE_ESQUERDA 
-	{ printf("\t while (%s != %.2f) {", buffer, $4 );}
-	| ENQUANTO IDENTIFICADOR IGUAL Expressao CHAVE_ESQUERDA 
-	{ printf("\t while (%s == %.2f) {", buffer, $4 );}
+	PARA IDENTIFICADOR DE NUMERO_REAL ATE NUMERO_REAL FACA { printf("for (%s = %d; %s <= %d; %s++) { ", $2,$4,$2,$6,$2); }
+	| PARA PARENTESIS_ESQUERDO IDENTIFICADOR DE NUMERO_REAL ATE NUMERO_REAL PARENTESIS_DIREITO FACA
+	{ printf("for (%s = %d; %s <= %d; %s++) {",$3,$5,$3,$7,$3);}
+	| PARA PARENTESIS_ESQUERDO IDENTIFICADOR DE NUMERO_REAL ATE NUMERO_REAL PARENTESIS_DIREITO CHAVE_ESQUERDA
+	{ printf("for (%s = %d; %s <= %d; %s++) {",$3,$5,$3,$7,$3);}
+	| ENQUANTO IDENTIFICADOR DIFERENTE NUMERO_REAL FACA 
+	{ printf("while (%s != %d) ", $2, $4 );}
+	| ENQUANTO IDENTIFICADOR IGUAL NUMERO_REAL FACA 
+	{ printf("while (%s == %d) ", $2, $4 );}
+	| ENQUANTO IDENTIFICADOR DIFERENTE NUMERO_REAL CHAVE_ESQUERDA 
+	{ printf("while (%s != %d) {", $2, $4 );}
+	| ENQUANTO IDENTIFICADOR IGUAL NUMERO_REAL CHAVE_ESQUERDA 
+	{ printf("while (%s == %d) {", $2, $4 );}
 ;
 
 Retorno:
-	RETORNE Expressao PONTO_E_VIRGULA { 
+	RETORNE NUMERO_REAL PONTO_E_VIRGULA { 
 		int aux=0, aux1=0;
 		aux = $2;
 		aux1 = ceil($2);
 		if(aux == aux1){
-			printf("\treturn %d;", $2); 
+			printf("return %d;", $2); 
 		}else{
-			printf("\treturn %.2f;", $2); 
+			printf("return %.2f;", $2); 
 		}
 	}
-	| RETORNE IDENTIFICADOR PONTO_E_VIRGULA { printf("\treturn %s;", buffer); }
+	| RETORNE IDENTIFICADOR PONTO_E_VIRGULA { printf("return %s;", $2); }
 ;
- 
+
+
 
 %%
 
-int yyerror(char *s) {
-   printf("%s",s);
+void yyerror(const char *s) {
+    printf("%s\n",s);
 }
 
-int main() {
+int main(int argc, char *argv[]) 
+{	
+	dicionario["inteiro"] = "int";
+	dicionario["real"] = "float";
+	dicionario["caractere"] = "char";
+	dicionario["literal"] = "string";
+	dicionario["real"] = "float";
+	
+	string arquivoEntrada;
+
+	if(argc == 1)
+		arquivoEntrada = "codigo.prg";
+	else
+		arquivoEntrada = argv[1];
+
 	// open a file handle to a particular file:
-	FILE *myfile = fopen("codigo.prg", "r");
+	FILE *myfile = fopen(arquivoEntrada.c_str(), "r");
+
+/*	string arquivoSaida;
+
+	if(argc > 2)
+		arquivoSaida = argv[argc-1];*/
 
 	// make sure it is valid:
 	if (!myfile) {
-		printf("Desculpe-nos!! Não conseguimos abrir o arquivo: codigo.prg!! D: \n");
+		printf("Desculpe-nos!! Não conseguimos abrir o arquivo: %s! \n", arquivoEntrada.c_str());
 		return -1;
 	}
 	// set flex to read from it instead of defaulting to STDIN:

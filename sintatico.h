@@ -37,68 +37,78 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     INTEIRO = 258,
-     REAL = 259,
-     NUMERO_REAL = 260,
-     CARACTERE = 261,
-     SE = 262,
-     SENAO = 263,
-     PARA = 264,
-     DE = 265,
-     ATE = 266,
-     FACA = 267,
-     PASSO = 268,
-     PARE = 269,
-     ENQUANTO = 270,
-     REPITA = 271,
-     RETORNE = 272,
-     ATRIBUICAO = 273,
-     DIFERENTE = 274,
-     IDENTIFICADOR = 275,
-     MAIS = 276,
-     MENOS = 277,
-     ASTERISCO = 278,
-     BARRA = 279,
-     POTENCIA = 280,
-     FIM_LINHA = 281,
-     TABULACAO = 282,
-     E = 283,
-     OU = 284,
-     MAIS_ATRIBUICAO = 285,
-     MENOS_ATRIBUICAO = 286,
-     ASTERISCO_ATRIBUICAO = 287,
-     BARRA_ATRIBUICAO = 288,
-     MENOR = 289,
-     MAIOR = 290,
-     MAIOR_IGUAL = 291,
-     MENOR_IGUAL = 292,
-     IGUAL = 293,
-     EXCLAMACAO = 294,
-     COMENTARIO = 295,
-     FRASE_COMENTARIO = 296,
-     E_COMERCIAL = 297,
-     BARRA_VERTICAL = 298,
-     DOIS_PONTOS = 299,
-     PONTO_E_VIRGULA = 300,
-     VIRGULA = 301,
-     CHAVE_ESQUERDA = 302,
-     CHAVE_DIREITA = 303,
-     COLCHETE_ESQUERDO = 304,
-     COLCHETE_DIREITO = 305,
-     PARENTESIS_ESQUERDO = 306,
-     PARENTESIS_DIREITO = 307,
-     INCLUA = 308,
-     PRINCIPAL = 309,
-     DEFINA = 310,
-     LEIA = 311,
-     ESCREVA = 312
+     TIPO = 258,
+     NUMERO_REAL = 259,
+     ATRIBUICAO = 260,
+     DIFERENTE = 261,
+     IDENTIFICADOR = 262,
+     MAIS = 263,
+     MENOS = 264,
+     ASTERISCO = 265,
+     BARRA = 266,
+     POTENCIA = 267,
+     FIM_LINHA = 268,
+     TABULACAO = 269,
+     E = 270,
+     OU = 271,
+     MAIS_ATRIBUICAO = 272,
+     MENOS_ATRIBUICAO = 273,
+     ASTERISCO_ATRIBUICAO = 274,
+     BARRA_ATRIBUICAO = 275,
+     MENOR = 276,
+     MAIOR = 277,
+     MAIOR_IGUAL = 278,
+     MENOR_IGUAL = 279,
+     IGUAL = 280,
+     EXCLAMACAO = 281,
+     COMENTARIO = 282,
+     E_COMERCIAL = 283,
+     BARRA_VERTICAL = 284,
+     DOIS_PONTOS = 285,
+     PONTO_E_VIRGULA = 286,
+     VIRGULA = 287,
+     CHAVE_ESQUERDA = 288,
+     CHAVE_DIREITA = 289,
+     COLCHETE_ESQUERDO = 290,
+     COLCHETE_DIREITO = 291,
+     PARENTESIS_ESQUERDO = 292,
+     PARENTESIS_DIREITO = 293,
+     INCLUA = 294,
+     PRINCIPAL = 295,
+     DEFINA = 296,
+     LEIA = 297,
+     ESCREVA = 298,
+     SE = 299,
+     SENAO = 300,
+     PARA = 301,
+     DE = 302,
+     ATE = 303,
+     PARE = 304,
+     ENQUANTO = 305,
+     FACA = 306,
+     REPITA = 307,
+     RETORNE = 308
    };
 #endif
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+{
+
+/* Line 2068 of yacc.c  */
+#line 22 "PCSintatico.y"
+
+	int number;
+	char caracter;
+	char* string;
+
+
+
+/* Line 2068 of yacc.c  */
+#line 111 "PCSintatico.tab.h"
+} YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
