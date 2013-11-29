@@ -2,7 +2,7 @@
 #include <stdlib.h>;
 #include <stdio.h>;
 
-						#define MAX 3;
+#define MAX 3;
 #define _SIZE 15;
 #define MAX_SIZE 10;
 
@@ -18,6 +18,8 @@ int main() {
 
 	printf("NumeroB");
 	scanf("%d", &numeroB);
+
+	printf("42");
 
 	if(xombi > 1)
 	if(xombi >= 2)

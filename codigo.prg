@@ -19,6 +19,8 @@ inteiro principal(){
 	escreva NumeroB;
 	leia numeroB;
 
+	escreva 42;
+
 	se xombi > 1
 	se xombi >= 2
 	se (xombi > 3)

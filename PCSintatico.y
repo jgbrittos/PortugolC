@@ -97,7 +97,8 @@ Tipo:
 ;
 
 LeituraEscrita:
-	ESCREVA IDENTIFICADOR PONTO_E_VIRGULA{ printf("printf(\"%s\");", $2);  }
+	ESCREVA IDENTIFICADOR PONTO_E_VIRGULA { printf("printf(\"%s\");", $2);  }
+	| ESCREVA NUMERO_REAL PONTO_E_VIRGULA { printf("printf(\"%d\");", $2); }
 	| LEIA IDENTIFICADOR PONTO_E_VIRGULA { printf("scanf(\"%%d\", &%s);", $2); }
 ;
 
