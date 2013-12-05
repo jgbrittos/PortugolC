@@ -2,7 +2,7 @@
 #include <stdlib.h>;
 #include <stdio.h>;
 
-						#define MAX 3;
+#define MAX 3;
 #define _SIZE 15;
 #define MAX_SIZE 10;
 
@@ -28,6 +28,8 @@ int main() {
 	if(xombi <= 2)
 	if(xombi < 3)
 	if(xombi <= 4)
+	
+	if(xombi > 2) else {xombi}
 
 	if(xombi == 1)
 	if(xombi == 2)
@@ -46,6 +48,7 @@ int main() {
 	while (xombi == 0) {
 	}
 
+	return 0;
 }
 
 
