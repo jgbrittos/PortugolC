@@ -14,6 +14,7 @@ extern int yyparse();
 extern FILE *yyin;
 
 void yyerror(const char *s);
+char returnType(char c);
 
 map <string,string> dicionario;
 
@@ -94,7 +95,10 @@ Principal:
 ;
 
 Tipo:
-	TIPO IDENTIFICADOR PONTO_E_VIRGULA { cout << dicionario[$1] << " " << $2 << ";"; } 
+	TIPO IDENTIFICADOR PONTO_E_VIRGULA {
+		char aux = returnType($1[0]);//CAPTURA O TIPO DA VARIAVEL
+		cout << dicionario[$1] << " " << $2 << ";";
+	} 
 ;
 
 LeituraEscrita:
@@ -115,8 +119,8 @@ Condicional:
 
 	| SE IDENTIFICADOR MAIOR NUMERO_REAL CHAVE_ESQUERDA CHAVE_DIREITA 
 	SENAO CHAVE_ESQUERDA IDENTIFICADOR CHAVE_DIREITA { printf("if(%s > %d) else {%s}",$2, $4, $9); }
-	| SE Expressao MAIOR_IGUAL NUMERO_REAL CHAVE_ESQUERDA CHAVE_DIREITA 
-	SENAO CHAVE_ESQUERDA NUMERO_REAL CHAVE_DIREITA { printf("if(%.2f >= %.2f) else {%.2f}",$3, $5, $9); }
+	| SE NUMERO_REAL MAIOR_IGUAL NUMERO_REAL CHAVE_ESQUERDA CHAVE_DIREITA 
+	SENAO CHAVE_ESQUERDA NUMERO_REAL CHAVE_DIREITA { printf("if(%.2f >= %.2f) else {%.2f}",$2, $4, $9); }
 	| SE PARENTESIS_ESQUERDO NUMERO_REAL MAIOR NUMERO_REAL PARENTESIS_DIREITO CHAVE_ESQUERDA CHAVE_DIREITA
 	SENAO CHAVE_ESQUERDA NUMERO_REAL CHAVE_DIREITA { printf("if(%.2f > %.2f) else {%.2f}",$3, $5, $11); }
 	| SE PARENTESIS_ESQUERDO NUMERO_REAL MAIOR_IGUAL NUMERO_REAL PARENTESIS_DIREITO CHAVE_ESQUERDA CHAVE_DIREITA 
@@ -156,6 +160,20 @@ Retorno:
 
 %%
 
+char returnType(char c){
+	char aux;
+	if(c == 'i'){
+		aux = 'd';
+	}else if(c == 'r'){
+		aux = 'f';
+	}else if(c == 'c'){
+		aux = 'c';
+	}else if(c == 'l'){
+		aux = 's';
+	}
+	return aux;
+}
+
 void yyerror(const char *s) {
     printf("%s\n",s);
 }
@@ -166,7 +184,6 @@ int main(int argc, char *argv[])
 	dicionario["real"] = "float";
 	dicionario["caractere"] = "char";
 	dicionario["literal"] = "string";
-	dicionario["real"] = "float";
 	
 	string arquivoEntrada;
 
