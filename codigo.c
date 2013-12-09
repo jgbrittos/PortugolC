@@ -30,6 +30,8 @@ int main() {
 	if(xombi <= 2)
 	if(xombi < 3)
 	if(xombi <= 4)
+	
+	if(xombi > 2) else {xombi}
 
 	if(xombi == 1)
 	if(xombi == 2)
@@ -48,6 +50,7 @@ int main() {
 	while (xombi == 0) {
 	}
 
+	return 0;
 }
 
 
