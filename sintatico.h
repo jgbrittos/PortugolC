@@ -98,7 +98,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 22 "PCSintatico.y"
+#line 23 "PCSintatico.y"
 
 	int number;
 	char caracter;

@@ -8,16 +8,18 @@
 
 int main() {
 
-	int numeroA;
+	float numeroA;
 	float numeroB;
-	char resultado;
-	int xombi;
+	char operacao;
 
 	printf("numeroA");
 	scanf("%d", &numeroA);
 
 	printf("NumeroB");
 	scanf("%d", &numeroB);
+
+	printf("operacao");
+	scanf("%d", &operacao);
 
 	printf("42");
 
@@ -30,7 +32,7 @@ int main() {
 	if(xombi <= 2)
 	if(xombi < 3)
 	if(xombi <= 4)
-	
+
 	if(xombi > 2) else {xombi}
 
 	if(xombi == 1)

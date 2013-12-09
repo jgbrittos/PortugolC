@@ -33,7 +33,7 @@ inteiro principal(){
 	se (xombi < 3)
 	se (xombi <= 4)
 
-	se (xombi > 2) senao {xombi}
+	se xombi > 2 {} senao {xombi}
 
 	se xombi = 1
 	se (xombi = 2)
